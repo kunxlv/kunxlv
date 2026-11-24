@@ -144,8 +144,22 @@ export function AlbumList({ albums, usingSamples, storage }: { albums: Album[]; 
 
 /* ---------- photo uploads ---------- */
 
+const looksHeic = (f: File) => /image\/hei[cf]/i.test(f.type) || /\.hei[cf]$/i.test(f.name);
+
+// Chrome and Firefox can't decode HEIC (iPhone photos), so those go through libheif,
+// loaded only when needed. Safari decodes HEIC itself and takes the fast path.
+async function decode(file: File): Promise<ImageBitmap> {
+  try {
+    return await createImageBitmap(file, { imageOrientation: "from-image" });
+  } catch (err) {
+    if (!looksHeic(file)) throw new Error(`Couldn't read ${file.name}. Try a JPEG, PNG or HEIC photo.`, { cause: err });
+    const { heicTo } = await import("heic-to");
+    return heicTo({ blob: file, type: "bitmap", options: { imageOrientation: "from-image" } });
+  }
+}
+
 async function shrink(file: File): Promise<Blob> {
-  const bmp = await createImageBitmap(file, { imageOrientation: "from-image" });
+  const bmp = await decode(file);
   const max = 2400;
   const s = Math.min(1, max / Math.max(bmp.width, bmp.height));
   const canvas = document.createElement("canvas");
@@ -182,7 +196,7 @@ function PhotoSlot({ src, folder, onChange, ratio, label }: { src: string; folde
           : src ? <span style={{ position: "absolute", right: 8, bottom: 8, background: "rgba(0,0,0,0.6)", color: "#fff", fontSize: 13, padding: "4px 10px" }}>Replace</span>
           : <span>Add {label}</span>}
       </button>
-      <input ref={input} type="file" accept="image/jpeg,image/png,image/webp,image/heic" hidden onChange={(e) => pick(e.target.files)} />
+      <input ref={input} type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" hidden onChange={(e) => pick(e.target.files)} />
       {err ? <span role="alert" style={{ fontSize: 13 }}>{err}</span> : null}
     </div>
   );
@@ -385,7 +399,7 @@ export function AlbumEditor({ album, isNew }: { album: Album | null; isNew: bool
           </button>
           <button type="button" className="kv-btn kv-btn--ghost" onClick={() => add({ type: "text", text: "" })}>Add text</button>
           <button type="button" className="kv-btn kv-btn--ghost" onClick={() => add({ type: "pair", images: ["", ""] as [string, string] })}>Add photo pair</button>
-          <input ref={bulkInput} type="file" accept="image/jpeg,image/png,image/webp,image/heic" multiple hidden onChange={(e) => addMany(e.target.files)} />
+          <input ref={bulkInput} type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" multiple hidden onChange={(e) => addMany(e.target.files)} />
         </div>
         <span style={{ fontSize: 13, color: slate }}>Photos are resized to 2400px on the long side before uploading. {photos.length} {photos.length === 1 ? "photo" : "photos"} in this album.</span>
       </section>
