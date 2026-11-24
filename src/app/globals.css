@@ -26,12 +26,16 @@ body {
 a { color: inherit; }
 h1, h2, h3 { font-family: var(--font-heading); }
 ::selection { background: #000; color: #fff; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.kv-door:focus-visible, .kv-tile:focus-visible { outline-offset: -6px; }
 
-.kv-label { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.kv-label { font-size: 14px; font-weight: 500; letter-spacing: 0; }
+/* Spaced capitals are reserved for the Life pages (the george-zhang look) */
+.kv-caps { font-size: 13px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; }
 .kv-btn {
   display: inline-flex; align-items: center; height: 52px; padding: 0 28px; border: 1px solid #000;
-  background: #000; color: #fff; text-decoration: none; font-size: 13px; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: inherit;
+  background: #000; color: #fff; text-decoration: none; font-size: 16px; font-weight: 600;
+  letter-spacing: -0.005em; cursor: pointer; font-family: inherit;
 }
 .kv-btn--ghost { background: transparent; color: #000; }
 .kv-hl { color: #000; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }

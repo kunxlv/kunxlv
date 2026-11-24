@@ -34,7 +34,7 @@ async function PostBody({ params }: { params: Promise<{ slug: string }> }) {
           <a href={post.url} target="_blank" rel="noreferrer" style={{ fontSize: 15, fontWeight: 500, color: "#fff", textUnderlineOffset: 5 }}>Read on Medium ↗</a>
         </div>
         <div data-kv-title style={{ position: "relative", width: "100%", maxWidth: 760, margin: "0 auto", padding: "0 clamp(20px, 5vw, 48px) 72px", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 18 }}>
-          <span style={{ fontSize: 14, color: "rgba(255,255,255,0.85)" }}>{post.date} · {post.readingTime} min read</span>
+          <span style={{ fontSize: 14, color: "rgba(255,255,255,0.85)" }}>{post.date}, {post.readingTime} min read</span>
           <h1 style={{ margin: 0, fontSize: "clamp(40px, 5vw, 64px)", fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 1.05 }}>{post.title}</h1>
         </div>
       </header>
@@ -42,8 +42,8 @@ async function PostBody({ params }: { params: Promise<{ slug: string }> }) {
       <div style={{ maxWidth: 680, margin: "0 auto", padding: "72px clamp(20px, 5vw, 48px) 120px", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 32 }}>
         <p style={{ margin: 0, paddingTop: 24, borderTop: "1px solid #ddd", fontSize: 15, color: "#6b6b6b" }}>Originally published on <a href={post.url} target="_blank" rel="noreferrer" style={{ color: "#000", textUnderlineOffset: 4 }}>Medium ↗</a></p>
         <div style={{ display: "flex", justifyContent: "space-between", gap: 24, flexWrap: "wrap" }}>
-          {older ? <TLink href={`/writing/${older.slug}`} style={{ display: "flex", flexDirection: "column", gap: 6, textDecoration: "none", maxWidth: 300 }}><span className="kv-label" style={{ color: "#6b6b6b" }}>← Previous</span><span style={{ fontSize: 20, fontWeight: 600, letterSpacing: "-0.015em", lineHeight: 1.25 }}>{older.title}</span></TLink> : <span />}
-          {newer ? <TLink href={`/writing/${newer.slug}`} style={{ display: "flex", flexDirection: "column", gap: 6, textDecoration: "none", maxWidth: 300, textAlign: "right", marginLeft: "auto" }}><span className="kv-label" style={{ color: "#6b6b6b" }}>Next →</span><span style={{ fontSize: 20, fontWeight: 600, letterSpacing: "-0.015em", lineHeight: 1.25 }}>{newer.title}</span></TLink> : null}
+          {older ? <TLink href={`/writing/${older.slug}`} style={{ display: "flex", flexDirection: "column", gap: 6, textDecoration: "none", maxWidth: 300 }}><span className="kv-label" style={{ color: "#6b6b6b" }}>Previous post</span><span style={{ fontSize: 20, fontWeight: 600, letterSpacing: "-0.015em", lineHeight: 1.25 }}>{older.title}</span></TLink> : <span />}
+          {newer ? <TLink href={`/writing/${newer.slug}`} style={{ display: "flex", flexDirection: "column", gap: 6, textDecoration: "none", maxWidth: 300, textAlign: "right", marginLeft: "auto" }}><span className="kv-label" style={{ color: "#6b6b6b" }}>Next post</span><span style={{ fontSize: 20, fontWeight: 600, letterSpacing: "-0.015em", lineHeight: 1.25 }}>{newer.title}</span></TLink> : null}
         </div>
       </div>
     </>

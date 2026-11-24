@@ -31,9 +31,9 @@ export default async function AlbumPage({ params }: PageProps<"/life/[slug]">) {
     <main style={{ background: "#fff", color: "#000" }}>
       <header style={{ position: "relative", minHeight: "100svh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, textAlign: "center", color: "#fff", padding: "0 24px", backgroundColor: "#2f2f2f", backgroundImage: `url(${album.cover})`, backgroundSize: "cover", backgroundPosition: "center" }}>
         <span style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.2)" }} />
-        <TLink href="/life" className="kv-label" style={{ position: "absolute", top: 36, left: 0, right: 0, fontSize: 14, letterSpacing: "0.32em", textDecoration: "none", color: "#fff" }}>Kunal Vaidya</TLink>
+        <TLink href="/life" className="kv-caps" style={{ position: "absolute", top: 36, left: 0, right: 0, fontSize: 14, letterSpacing: "0.32em", textDecoration: "none", color: "#fff" }}>Kunal Vaidya</TLink>
         <h1 data-kv-title style={{ position: "relative", margin: 0, fontSize: "clamp(30px, 3.6vw, 52px)", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", lineHeight: 1.15 }}>{album.title}</h1>
-        <p className="kv-label" style={{ position: "relative", margin: 0, fontSize: 12, fontWeight: 500, letterSpacing: "0.3em" }}>{album.date}</p>
+        <p className="kv-caps" style={{ position: "relative", margin: 0, fontSize: 12, fontWeight: 500, letterSpacing: "0.3em" }}>{album.date}</p>
       </header>
 
       <div style={{ maxWidth: 1120, margin: "0 auto", padding: "96px clamp(20px, 4vw, 40px) 140px", display: "flex", flexDirection: "column", gap: 56 }}>

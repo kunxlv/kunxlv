@@ -22,7 +22,7 @@ export function Dock() {
       style={{
         position: "fixed", left: "50%", bottom: 24, transform: "translateX(-50%)", zIndex: 1000,
         display: "flex", alignItems: "center", gap: 2, padding: 6, borderRadius: 100,
-        background: "rgba(20,20,20,0.3)", boxShadow: "0 6px 24px rgba(0,0,0,0.12)",
+        background: "rgba(24,24,24,0.58)", boxShadow: "0 6px 24px rgba(0,0,0,0.12)",
         backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.16)",
         maxWidth: "calc(100% - 32px)", overflowX: "auto",
         opacity: onHome ? 0 : 1, pointerEvents: onHome ? "none" : "auto", transition: "opacity 400ms ease",

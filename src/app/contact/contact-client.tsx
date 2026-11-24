@@ -6,8 +6,8 @@ export function CopyEmail({ email }: { email: string }) {
   const [copied, setCopied] = useState(false);
   return (
     <button type="button" onClick={() => { navigator.clipboard?.writeText(email).catch(() => {}); setCopied(true); setTimeout(() => setCopied(false), 1800); }}
-      style={{ height: 36, padding: "0 16px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.4)", background: "rgba(255,255,255,0.12)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 500, cursor: "pointer" }}>
-      {copied ? "Copied" : "Copy"}
+      style={{ height: 44, padding: "0 18px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.4)", background: "rgba(255,255,255,0.12)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 500, cursor: "pointer" }}>
+      <span aria-live="polite">{copied ? "Copied" : "Copy email"}</span>
     </button>
   );
 }
@@ -29,8 +29,8 @@ const TOPICS = [
   { id: "hi", label: "Just saying hi", ph: "Go on." },
 ];
 
-const field: React.CSSProperties = { height: 52, padding: "0 16px", border: "1px solid #ddd", background: "#f4f4f4", fontFamily: "inherit", fontSize: 17, borderRadius: 0, color: "#000" };
-const label: React.CSSProperties = { fontSize: 13, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" };
+const field: React.CSSProperties = { height: 52, padding: "0 16px", border: "1px solid #8c8c8c", background: "#fff", fontFamily: "inherit", fontSize: 17, borderRadius: 0, color: "#000" };
+const label: React.CSSProperties = { fontSize: 15, fontWeight: 600 };
 
 export function ContactForm() {
   const [topic, setTopic] = useState("role");
@@ -72,7 +72,7 @@ export function ContactForm() {
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           {TOPICS.map((t) => {
             const on = t.id === topic;
-            return <button key={t.id} type="button" onClick={() => setTopic(t.id)} aria-pressed={on} style={{ height: 44, padding: "0 18px", borderRadius: 100, border: `1px solid ${on ? "#000" : "#ddd"}`, background: on ? "#000" : "#fff", color: on ? "#fff" : "#000", fontFamily: "inherit", fontSize: 15, fontWeight: 500, cursor: "pointer" }}>{t.label}</button>;
+            return <button key={t.id} type="button" onClick={() => setTopic(t.id)} aria-pressed={on} style={{ height: 44, padding: "0 18px", borderRadius: 100, border: `1px solid ${on ? "#000" : "#8c8c8c"}`, background: on ? "#000" : "#fff", color: on ? "#fff" : "#000", fontFamily: "inherit", fontSize: 15, fontWeight: 500, cursor: "pointer" }}>{t.label}</button>;
           })}
         </div>
       </fieldset>

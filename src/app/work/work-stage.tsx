@@ -11,7 +11,7 @@ const GAP = 24;
 type Phase = "idle" | "start" | "grow" | "done" | "cstart" | "shrink";
 
 export function WorkStage() {
-  const rootRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLElement>(null);
   const stripRef = useRef<HTMLDivElement>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const lastWheel = useRef(0);
@@ -109,7 +109,7 @@ export function WorkStage() {
   const strip = [...projects, ...projects];
 
   return (
-    <div ref={rootRef} onWheel={onWheel} style={{ position: "relative", height: "100svh", minHeight: 680, overflow: "hidden", background: "#000" }}>
+    <main ref={rootRef} onWheel={onWheel} style={{ position: "relative", height: "100svh", minHeight: 680, overflow: "hidden", background: "#000" }}>
       <style>{`
         @keyframes kv-strip { from { transform: translateX(0) } to { transform: translateX(-50%) } }
         .kv-strip { animation: kv-strip 36s linear infinite; }
@@ -132,7 +132,6 @@ export function WorkStage() {
             </div>
           </div>
         </div>
-        <p className="kv-label" style={{ position: "absolute", top: 132, left: 0, right: 0, margin: 0, textAlign: "center", color: "#b5b5b5" }}>Work</p>
         <p style={{ position: "absolute", top: 330, left: 0, right: 0, margin: "0 auto", maxWidth: 540, padding: "0 20px", textAlign: "center", fontSize: 19, lineHeight: 1.5, color: "#b5b5b5" }}>An iOS app, my own home server and a couple of web tools, built after hours. Pick one to open it.</p>
       </div>
 
@@ -182,7 +181,7 @@ export function WorkStage() {
       <h1 data-kv-title style={{ position: "absolute", zIndex: 8, left: 0, right: 0, top: 168, margin: 0, textAlign: "center", fontSize: "clamp(56px, 9vw, 136px)", fontWeight: 600, letterSpacing: "-0.055em", lineHeight: 0.92, color: ink, transform: moving ? `translateY(-134px) scale(${titleScale})` : "none", transformOrigin: "50% 0", transition: `transform ${D}ms ${E}, color ${D}ms ${E}`, pointerEvents: "none" }}>
         Things I&apos;ve shipped.
       </h1>
-    </div>
+    </main>
   );
 }
 
@@ -228,7 +227,7 @@ function ProjectVisual({ p }: { p: Project }) {
         <div style={{ border: "1px solid #555", borderRadius: 10, padding: "14px 18px" }}>You, anywhere</div>
         <div style={{ paddingLeft: 20, color: "#b5b5b5" }}>↓ Tailscale</div>
         <div style={{ border: "1px solid #fff", borderRadius: 10, padding: "14px 18px", display: "flex", flexDirection: "column", gap: 10 }}>
-          <span style={{ fontWeight: 600 }}>onyx · Mac mini</span>
+          <span style={{ fontWeight: 600 }}>onyx, a Mac mini</span>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             {["Homebase dashboard", "[Service]", "[Service]"].map((s, k) => <span key={k} style={{ border: "1px solid #555", borderRadius: 100, padding: "6px 12px", fontSize: 14 }}>{s}</span>)}
           </div>

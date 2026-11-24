@@ -12,13 +12,13 @@ export async function POST(req: Request) {
   const message = clean(body.message, 5000);
   const topic = clean(body.topic, 60);
   if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !message) {
-    return NextResponse.json({ error: "Please add your name, a valid email and a message." }, { status: 400 });
+    return NextResponse.json({ error: "Add your name, an email address I can reply to, and a message." }, { status: 400 });
   }
 
   const key = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL;
   if (!key || !to) {
-    return NextResponse.json({ error: "The form isn't connected yet. Please email me directly." }, { status: 503 });
+    return NextResponse.json({ error: "Messages can't be sent from this form yet. Email me at the address on this page instead." }, { status: 503 });
   }
 
   const res = await fetch("https://api.resend.com/emails", {
@@ -32,6 +32,6 @@ export async function POST(req: Request) {
       text: `${message}\n\n— ${name} <${email}>\nTopic: ${topic || "n/a"}`,
     }),
   });
-  if (!res.ok) return NextResponse.json({ error: "Couldn't send right now. Please email me directly." }, { status: 502 });
+  if (!res.ok) return NextResponse.json({ error: "Your message didn't send. Try again in a minute, or email me at the address on this page." }, { status: 502 });
   return NextResponse.json({ ok: true });
 }
