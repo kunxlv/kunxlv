@@ -28,6 +28,11 @@ export default async function LifePage() {
         <span className="kv-caps" style={{ fontSize: 14, letterSpacing: "0.32em" }}>Kunal Vaidya</span>
       </div>
       <h1 style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0 0 0 0)" }}>Life</h1>
+      {grouped.length === 0 ? (
+        <div style={{ minHeight: "100svh", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <p className="kv-caps" style={{ margin: 0, fontSize: 13, color: "rgba(255,255,255,0.7)" }}>Albums coming soon</p>
+        </div>
+      ) : null}
       {grouped.map((row, r) => {
         const full = row.length === 1 && row[0].size === "full";
         return (
