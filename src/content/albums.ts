@@ -1,4 +1,4 @@
-// Albums will come from the admin dashboard. This file is the stand-in until then.
+// Sample albums, shown until the admin has saved real ones to storage (see src/lib/albums.ts).
 export type AlbumBlock =
   | { type: "text"; text: string }
   | { type: "pair"; images: [string, string] }
@@ -10,10 +10,11 @@ export type Album = {
   date: string;
   cover: string;
   size: "full" | "third";
+  hidden?: boolean;
   blocks: AlbumBlock[];
 };
 
-export const albums: Album[] = [
+export const sampleAlbums: Album[] = [
   {
     slug: "sample-album",
     title: "[Album name]",
@@ -33,10 +34,3 @@ export const albums: Album[] = [
   { slug: "sample-album-3", title: "[Album name]", date: "[Month Year]", cover: "/images/a-p2.jpg", size: "third", blocks: [{ type: "full", image: "/images/a-wide2.jpg" }] },
   { slug: "sample-album-4", title: "[Album name]", date: "[Month Year]", cover: "/images/a-p3.jpg", size: "third", blocks: [{ type: "full", image: "/images/a-wide2.jpg" }] },
 ];
-
-export function getAlbums() {
-  return albums;
-}
-export function getAlbum(slug: string) {
-  return albums.find((a) => a.slug === slug);
-}

@@ -14,7 +14,7 @@ const ITEMS = [
 
 export function Dock() {
   const pathname = usePathname();
-  const onHome = pathname === "/";
+  const onHome = pathname === "/" || pathname.startsWith("/admin");
   return (
     <nav
       aria-label="Site"

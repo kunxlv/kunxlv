@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getAlbums, type Album } from "@/content/albums";
+import { readAlbums, type Album } from "@/lib/albums";
 import { TLink } from "@/components/tlink";
 
 export const metadata: Metadata = { title: "Life", description: "Photo albums from Kunal Vaidya, with the stories behind them." };
@@ -20,8 +20,8 @@ function rows(albums: Album[]) {
   return out;
 }
 
-export default function LifePage() {
-  const grouped = rows(getAlbums());
+export default async function LifePage() {
+  const grouped = rows(await readAlbums());
   return (
     <main style={{ background: "#000", color: "#fff", position: "relative" }}>
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, zIndex: 2, display: "flex", justifyContent: "center", padding: "36px 20px", pointerEvents: "none" }}>

@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAlbum, getAlbums } from "@/content/albums";
+import { readAlbums } from "@/lib/albums";
 import { TLink } from "@/components/tlink";
 import { SiteFooter } from "@/components/site-footer";
 
-export function generateStaticParams() {
-  return getAlbums().map((a) => ({ slug: a.slug }));
+export async function generateStaticParams() {
+  const slugs = (await readAlbums()).map((a) => ({ slug: a.slug }));
+  // At least one entry keeps the route prerenderable; unknown slugs render on demand.
+  return slugs.length ? slugs : [{ slug: "none" }];
 }
 
 export async function generateMetadata({ params }: PageProps<"/life/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  return { title: getAlbum(slug)?.title ?? "Album" };
+  return { title: (await readAlbums()).find((a) => a.slug === slug)?.title ?? "Album" };
 }
 
 const Arrow = ({ dir }: { dir: "prev" | "next" }) => (
@@ -19,7 +21,7 @@ const Arrow = ({ dir }: { dir: "prev" | "next" }) => (
 
 export default async function AlbumPage({ params }: PageProps<"/life/[slug]">) {
   const { slug } = await params;
-  const all = getAlbums();
+  const all = await readAlbums();
   const idx = all.findIndex((a) => a.slug === slug);
   const album = all[idx];
   if (!album) notFound();
