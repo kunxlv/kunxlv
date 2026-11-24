@@ -38,11 +38,12 @@ export default async function AlbumPage({ params }: PageProps<"/life/[slug]">) {
         <p className="kv-caps" style={{ position: "relative", margin: 0, fontSize: 12, fontWeight: 500, letterSpacing: "0.3em" }}>{album.date}</p>
       </header>
 
-      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "96px clamp(20px, 4vw, 40px) 140px", display: "flex", flexDirection: "column", gap: 56 }}>
+      {/* Photos run nearly edge to edge: ~2.8vw side margins and ~2vw gutters, like the reference. */}
+      <div style={{ padding: "clamp(48px, 5vw, 72px) clamp(16px, 2.8vw, 48px) 140px", display: "flex", flexDirection: "column", gap: "clamp(16px, 2vw, 34px)" }}>
         {album.blocks.map((b, k) => {
-          if (b.type === "text") return <p key={k} style={{ margin: "0 auto", maxWidth: 600, fontFamily: "var(--font-mono)", fontSize: 16, lineHeight: 1.6, color: "rgba(0,0,0,0.8)" }}>{b.text}</p>;
+          if (b.type === "text") return <p key={k} style={{ margin: "clamp(8px, 1.4vw, 24px) auto", maxWidth: 600, width: "100%", fontFamily: "var(--font-mono)", fontSize: 16, lineHeight: 1.6, color: "rgba(0,0,0,0.8)" }}>{b.text}</p>;
           if (b.type === "pair") return (
-            <div key={k} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: 48 }}>
+            <div key={k} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "clamp(16px, 2vw, 34px)" }}>
               {b.images.map((src, j) => <img key={j} src={src} alt="" loading="lazy" style={{ ...img, aspectRatio: "2 / 3" }} />)}
             </div>
           );
