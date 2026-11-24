@@ -36,7 +36,7 @@ function enterTitles(late: boolean) {
   setTimeout(() => root.classList.remove("kv-entering", "kv-entering-late"), 1600);
 }
 
-export function TransitionProvider({ children }: { children: ReactNode }) {
+export function TransitionProvider({ children, chrome }: { children: ReactNode; chrome?: ReactNode }) {
   const router = useRouter();
   const busy = useRef(false);
   const arrived = useRef<((path: string) => void) | null>(null);
@@ -132,6 +132,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
   return (
     <TransitionContext.Provider value={{ navigate, prefetch }}>
       <div data-kv-page>{children}</div>
+      {chrome}
       <Suspense fallback={null}>
         <PathWatcher onChange={(p) => arrived.current?.(p)} />
       </Suspense>

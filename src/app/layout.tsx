@@ -17,11 +17,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body>
-        <TransitionProvider>
+        <TransitionProvider
+          chrome={
+            <Suspense fallback={null}>
+              <Dock />
+            </Suspense>
+          }
+        >
           {children}
-          <Suspense fallback={null}>
-            <Dock />
-          </Suspense>
         </TransitionProvider>
       </body>
     </html>
