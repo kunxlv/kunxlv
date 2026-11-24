@@ -9,7 +9,12 @@ type Ctx = { navigate: (href: string, morph?: Morph) => void; prefetch: (href: s
 const TransitionContext = createContext<Ctx | null>(null);
 const EASE = "cubic-bezier(0.65, 0, 0.35, 1)";
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-const frame = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+// Two animation frames, with a timer fallback: hidden tabs pause rAF, which would otherwise freeze the overlay.
+const frame = () =>
+  new Promise<void>((r) => {
+    const t = setTimeout(r, 60);
+    requestAnimationFrame(() => requestAnimationFrame(() => { clearTimeout(t); r(); }));
+  });
 
 function snapshot(): HTMLElement | null {
   const page = document.querySelector<HTMLElement>("[data-kv-page]");
@@ -73,6 +78,7 @@ export function TransitionProvider({ children, chrome }: { children: ReactNode; 
           const W = window.innerWidth;
           const H = window.innerHeight;
           const overlay = el({ position: "fixed", inset: "0", zIndex: "900", pointerEvents: "auto" });
+          overlay.dataset.kvOverlay = "";
           const grow = el({
             position: "absolute", inset: "0", backgroundColor: morph.background,
             backgroundImage: morph.image ? `url(${morph.image})` : "", backgroundSize: "cover", backgroundPosition: "center",
@@ -93,6 +99,7 @@ export function TransitionProvider({ children, chrome }: { children: ReactNode; 
           overlay.remove();
         } else {
           const stage = el({ position: "fixed", inset: "0", zIndex: "900", background: "#000", pointerEvents: "auto" });
+          stage.dataset.kvOverlay = "";
           const card = el({ position: "absolute", inset: "0", overflow: "hidden", background: "#fff", transformOrigin: "50% 50%" });
           const ghost = snapshot();
           if (ghost) card.appendChild(ghost);
@@ -121,6 +128,7 @@ export function TransitionProvider({ children, chrome }: { children: ReactNode; 
           stage.remove();
         }
       } finally {
+        document.querySelectorAll("[data-kv-overlay]").forEach((n) => n.remove());
         busy.current = false;
       }
     },
