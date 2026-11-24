@@ -34,11 +34,19 @@ async function PostBody({ params }: { params: Promise<{ slug: string }> }) {
           <a href={post.url} target="_blank" rel="noreferrer" style={{ fontSize: 15, fontWeight: 500, color: "#fff", textUnderlineOffset: 5 }}>Read on Medium ↗</a>
         </div>
         <div data-kv-title style={{ position: "relative", width: "100%", maxWidth: 760, margin: "0 auto", padding: "0 clamp(20px, 5vw, 48px) 72px", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 18 }}>
-          <span style={{ fontSize: 14, color: "rgba(255,255,255,0.85)" }}>{post.date}, {post.readingTime} min read</span>
+          <span style={{ fontSize: 14, color: "rgba(255,255,255,0.85)" }}>{post.date}{post.readingTime ? `, ${post.readingTime} min read` : ""}</span>
           <h1 style={{ margin: 0, fontSize: "clamp(40px, 5vw, 64px)", fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 1.05 }}>{post.title}</h1>
         </div>
       </header>
-      <article className="kv-prose" style={{ maxWidth: 680, margin: "0 auto", padding: "88px clamp(20px, 5vw, 48px) 0", boxSizing: "border-box" }} dangerouslySetInnerHTML={{ __html: post.html }} />
+      {post.partial ? (
+        <div style={{ maxWidth: 680, margin: "0 auto", padding: "88px clamp(20px, 5vw, 48px) 0", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 28 }}>
+          {post.subtitle ? <p style={{ margin: 0, fontSize: 24, lineHeight: 1.5, letterSpacing: "-0.01em" }}>{post.subtitle}</p> : null}
+          <p style={{ margin: 0, fontSize: 17, lineHeight: 1.6, color: "#6b6b6b" }}>The full post is on Medium.</p>
+          <a href={post.url} target="_blank" rel="noreferrer" className="kv-btn" style={{ alignSelf: "flex-start" }}>Read it on Medium ↗</a>
+        </div>
+      ) : (
+        <article className="kv-prose" style={{ maxWidth: 680, margin: "0 auto", padding: "88px clamp(20px, 5vw, 48px) 0", boxSizing: "border-box" }} dangerouslySetInnerHTML={{ __html: post.html }} />
+      )}
       <div style={{ maxWidth: 680, margin: "0 auto", padding: "72px clamp(20px, 5vw, 48px) 120px", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 32 }}>
         <p style={{ margin: 0, paddingTop: 24, borderTop: "1px solid #ddd", fontSize: 15, color: "#6b6b6b" }}>Originally published on <a href={post.url} target="_blank" rel="noreferrer" style={{ color: "#000", textUnderlineOffset: 4 }}>Medium ↗</a></p>
         <div style={{ display: "flex", justifyContent: "space-between", gap: 24, flexWrap: "wrap" }}>

@@ -4,11 +4,11 @@ export const site = {
   status: "Open to remote roles",
   location: "Dublin, Ireland",
   timeZone: "Europe/Dublin",
-  mediumUsername: process.env.MEDIUM_USERNAME ?? "",
+  mediumUsername: process.env.MEDIUM_USERNAME ?? "ikunalv",
   socials: [
     { name: "GitHub", url: "https://github.com/kunxlv" },
     { name: "LinkedIn", url: "" }, // TODO
-    { name: "Medium", url: "" }, // TODO
+    { name: "Medium", url: "https://medium.com/@ikunalv" },
     { name: "Instagram", url: "" }, // TODO
   ],
 };

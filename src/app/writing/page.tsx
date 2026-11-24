@@ -44,7 +44,7 @@ export default async function WritingPage() {
               <span className="kv-post-title" style={{ flex: "999 1 460px", minWidth: 0, fontSize: "clamp(36px, 4.4vw, 60px)", fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 1.02 }}>{latest.title}</span>
               <div style={{ flex: "1 1 300px", display: "flex", flexDirection: "column", gap: 14 }}>
                 <span style={{ fontSize: 18, lineHeight: 1.5, color: "#2f2f2f" }}>{latest.subtitle}</span>
-                <span style={{ fontSize: 14, color: "#6b6b6b" }}>{latest.date}, {latest.readingTime} min read</span>
+                <span style={{ fontSize: 14, color: "#6b6b6b" }}>{latest.date}{latest.readingTime ? `, ${latest.readingTime} min read` : ""}</span>
               </div>
             </div>
           </TLink>
@@ -59,7 +59,7 @@ export default async function WritingPage() {
               {earlier.map((p) => (
                 <TLink key={p.slug} href={`/writing/${p.slug}`} className="kv-post" morph={{ background: "#2f2f2f", image: p.cover ?? undefined }} style={{ display: "flex", flexDirection: "column", gap: 16, textDecoration: "none" }}>
                   <Cover post={p} ratio="3 / 2" />
-                  <span style={{ fontSize: 14, color: "#6b6b6b" }}>{p.date}, {p.readingTime} min read</span>
+                  <span style={{ fontSize: 14, color: "#6b6b6b" }}>{p.date}{p.readingTime ? `, ${p.readingTime} min read` : ""}</span>
                   <span className="kv-post-title" style={{ fontSize: "clamp(24px, 2.2vw, 30px)", fontWeight: 600, letterSpacing: "-0.025em", lineHeight: 1.15 }}>{p.title}</span>
                   <span style={{ fontSize: 17, lineHeight: 1.5, color: "#6b6b6b" }}>{p.subtitle}</span>
                 </TLink>
