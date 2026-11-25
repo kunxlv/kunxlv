@@ -3,7 +3,7 @@ import type { Segment } from "./projects";
 export const experience: { name: string; years: string; role: string; photo: string; /** Tall crop for phones (9:16). */ photoPortrait?: string; credit?: { text: string; href: string }; paras: Segment[][] }[] = [
   {
     name: "Squarespace", years: "2025 — Present", role: "Senior Software Engineer",
-    // Ship Street Great, Dublin 8, where the Squarespace office is. CC0.
+    // Squarespace HQ entrance, New York (photo supplied by Kunal).
     photo: "/images/experience/squarespace.jpg",
     photoPortrait: "/images/experience/squarespace-portrait.jpg",
     credit: { text: "Squarespace HQ, New York. Photo: Squarespace", href: "https://www.squarespace.com/about/company" },
