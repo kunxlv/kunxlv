@@ -81,7 +81,7 @@ export function ExperienceScenes() {
               <span>AWS Developer</span>
             </div>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 12 }}>
-              <a href="/cv.pdf" className="kv-btn">Download CV</a>
+              <a href="/Kunal_Vaidya_CV.pdf" download="Kunal_Vaidya_CV.pdf" className="kv-btn">Download CV</a>
               <TLink href="/contact" className="kv-btn kv-btn--ghost" style={{ height: 50, padding: "0 27px" }}>Get in touch</TLink>
             </div>
           </div>

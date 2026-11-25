@@ -37,7 +37,7 @@ export function HomeDoors({ lifeCover, buildsCover }: { lifeCover?: string; buil
               textDecoration: "none", transition: "flex-grow 700ms var(--ease)",
             }}
           >
-            {d.shade ? <span style={{ position: "absolute", inset: 0, background: `rgba(0,0,0,${d.shade})` }} /> : null}
+            {d.shade ? <span style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, rgba(0,0,0,${Math.min(0.75, d.shade + 0.4)}) 0%, rgba(0,0,0,${d.shade}) 45%, rgba(0,0,0,${d.shade * 0.4}) 100%)` }} /> : null}
             <span style={{ position: "relative", display: "flex", flexDirection: "column", gap: 8, whiteSpace: "nowrap" }}>
               <span className={d.image ? "kv-tag kv-glass-dark" : undefined} style={{ alignSelf: "flex-start", fontSize: 14, opacity: active ? (d.image ? 1 : 0.8) : 0, transition: "opacity 400ms ease" }}>{d.peek}</span>
               <span style={{ fontSize: "clamp(24px, 2.4vw, 40px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1 }}>{d.name}</span>
