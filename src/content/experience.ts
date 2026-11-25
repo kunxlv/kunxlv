@@ -6,7 +6,7 @@ export const experience: { name: string; years: string; role: string; photo: str
     // Ship Street Great, Dublin 8, where the Squarespace office is. CC0.
     photo: "/images/experience/squarespace.jpg",
     photoPortrait: "/images/experience/squarespace-portrait.jpg",
-    credit: { text: "Ship Street Great, Dublin. Photo: Ridiculopathy, CC0", href: "https://commons.wikimedia.org/wiki/File:Ship_Street_Great_approaching_10pm_on_a_summers_evening,_Dublin,_Ireland_02.jpg" },
+    credit: { text: "Squarespace HQ, New York. Photo: Squarespace", href: "https://www.squarespace.com/about/company" },
     paras: [
       ["Built the ", { hl: "Font Catalog Service" }, " from scratch: ", { hl: "4,500 fonts" }, " served to ", { hl: "~13M websites" }, ", with its own auth, monitoring and a production SLA."],
       ["Led ", { hl: "variable fonts" }, " from design doc to release, and added ", { hl: "real-time AI text generation" }, " to the content generator through the OpenAI and Anthropic APIs."],
