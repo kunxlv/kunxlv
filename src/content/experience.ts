@@ -24,7 +24,8 @@ export const experience: { name: string; years: string; role: string; photo: str
     name: "Mastercard", years: "2022 — 2024", role: "Software Engineer II",
     photo: "/images/experience/mastercard.jpg",
     photoPortrait: "/images/experience/mastercard-portrait.jpg",
-    credit: { text: "Dublin Bay. Photo: Jonjobaker, CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:North_Dublin_Bay_with_Poolbeg_Chimneys.jpg" },
+    // The Dublin office I worked in. Image from Mastercard's careers site.
+    credit: { text: "Mastercard, Dublin. Photo: Mastercard", href: "https://careers.mastercard.com/us/en/blogarticle/10-reasons-to-join-mastercard-in-dublin-ireland" },
     paras: [
       ["Built ", { hl: "real-time data ingestion on Kafka" }, ", and a reporting plugin other teams adopted with ", { hl: "zero code changes" }, "."],
       ["Mentored the junior engineers on the team."],
