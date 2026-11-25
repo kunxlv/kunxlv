@@ -21,7 +21,7 @@ export function Dock() {
       aria-hidden={onHome}
       style={{
         position: "fixed", left: "50%", bottom: 24, transform: "translateX(-50%)", zIndex: 1000,
-        display: "flex", alignItems: "center", gap: 2, padding: 6, borderRadius: 100,
+        display: "flex", alignItems: "center", gap: 2, padding: "6px clamp(2px, 1vw, 6px)", borderRadius: 100, maxWidth: "calc(100vw - 16px)",
         background: "rgba(24,24,24,0.58)", boxShadow: "0 6px 24px rgba(0,0,0,0.12)",
         backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.16)",
         maxWidth: "calc(100% - 32px)", overflowX: "auto",
@@ -37,8 +37,8 @@ export function Dock() {
             tabIndex={onHome ? -1 : undefined}
             aria-current={active ? "page" : undefined}
             style={{
-              display: "inline-flex", alignItems: "center", height: 44, padding: "0 16px", color: "#fff",
-              fontSize: 15, fontWeight: active ? 600 : 500, whiteSpace: "nowrap",
+              display: "inline-flex", alignItems: "center", height: 44, padding: "0 clamp(8px, 2.6vw, 16px)", color: "#fff",
+              fontSize: "clamp(13px, 3.6vw, 15px)", fontWeight: active ? 600 : 500, whiteSpace: "nowrap",
               textDecoration: active ? "underline" : "none", textDecorationThickness: "1.5px", textUnderlineOffset: 7,
             }}
           >
