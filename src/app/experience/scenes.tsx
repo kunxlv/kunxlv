@@ -50,7 +50,12 @@ export function ExperienceScenes() {
           const clip = k === 0 && p < 1 ? `inset(${inset}% ${inset}% ${inset}% ${inset}% round ${(10 * (1 - e0)).toFixed(1)}px)` : "none";
           return (
             <section key={c.name} aria-label={c.name} style={{ position: "absolute", inset: 0, zIndex: k + 1, transform: `translateY(${((1 - enter) * 100).toFixed(2)}%) scale(${(1 - 0.08 * cover).toFixed(4)})`, transformOrigin: "50% 30%", borderRadius: `${(28 * cover).toFixed(1)}px`, clipPath: clip, overflow: "hidden", background: TONES[k % TONES.length], color: "#fff" }}>
-              {c.photo ? <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${c.photo})`, backgroundSize: "cover", backgroundPosition: "center" }} /> : null}
+              {c.photo ? (
+                <picture>
+                  {c.photoPortrait ? <source media="(max-aspect-ratio: 4/5)" srcSet={c.photoPortrait} /> : null}
+                  <img src={c.photo} alt="" decoding="async" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                </picture>
+              ) : null}
               <span style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.2) 100%)" }} />
               <div style={{ position: "absolute", left: "clamp(24px, 5vw, 72px)", right: "clamp(24px, 5vw, 72px)", bottom: 120, display: "flex", flexDirection: "column", gap: 14, opacity: textOp, transform: `translateY(${((1 - textOp) * 24).toFixed(1)}px)` }}>
                 <span className="kv-tag kv-glass-dark" style={{ alignSelf: "flex-start", height: 34, fontSize: 14 }}>{c.role}, {c.years}</span>
