@@ -253,7 +253,7 @@ function ProjectVisual({ p }: { p: Project }) {
     return (
       <>
         {back ? <BrowserShot shot={back} style={{ left: "26%", top: "4%", width: "72%", transform: "rotate(3deg)", opacity: 0.9 }} /> : null}
-        <BrowserShot shot={front} style={{ left: "2%", top: "22%", width: "78%" }} />
+        <BrowserShot shot={front} style={back ? { left: "2%", top: "22%", width: "78%" } : { left: "6%", top: "10%", width: "88%" }} />
       </>
     );
   }

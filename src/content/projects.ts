@@ -28,6 +28,8 @@ export const projects: Project[] = [
     facts: [{ k: "Hardware", v: "Mac mini" }, { k: "Network", v: "Tailscale" }, { k: "Status", v: "Running" }],
     links: [{ label: "Read the write-up", href: "/writing", primary: true }],
     visual: "system",
+    // Homebase in demo mode, running on onyx.
+    shots: [{ src: "/images/work/homebase-home.jpg", url: "homebase, on onyx" }],
   },
   {
     slug: "reckoner", name: "Reckoner", kind: "Web tool",
