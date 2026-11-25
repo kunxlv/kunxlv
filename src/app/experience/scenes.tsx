@@ -65,7 +65,7 @@ export function ExperienceScenes() {
                 </div>
               </div>
               {c.credit ? (
-                <a href={c.credit.href} target="_blank" rel="noreferrer" className="kv-tag kv-glass-dark" style={{ position: "absolute", right: "clamp(24px, 5vw, 72px)", top: 28, height: 26, padding: "0 12px", fontSize: 12, color: "rgba(255,255,255,0.85)", textDecoration: "none", opacity: textOp }}>{c.credit.text}</a>
+                <a href={c.credit.href || undefined} target={c.credit.href ? "_blank" : undefined} rel="noreferrer" className="kv-tag kv-glass-dark" style={{ position: "absolute", right: "clamp(24px, 5vw, 72px)", top: 28, height: 26, padding: "0 12px", fontSize: 12, color: "rgba(255,255,255,0.85)", textDecoration: "none", opacity: textOp }}>{c.credit.text}</a>
               ) : null}
               <span style={{ position: "absolute", inset: 0, background: "#000", opacity: 0.6 * cover, pointerEvents: "none" }} />
             </section>

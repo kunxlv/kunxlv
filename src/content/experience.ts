@@ -1,6 +1,6 @@
 import type { Segment } from "./projects";
 
-export const experience: { name: string; years: string; role: string; photo: string; /** Tall crop for phones (9:16). */ photoPortrait?: string; credit?: { text: string; href: string }; paras: Segment[][] }[] = [
+export const experience: { name: string; years: string; role: string; photo: string; /** Tall crop for phones (9:16). */ photoPortrait?: string; credit?: { text: string; href?: string }; paras: Segment[][] }[] = [
   {
     name: "Squarespace", years: "2025 — Present", role: "Senior Software Engineer",
     // Squarespace HQ entrance, New York (photo supplied by Kunal).
@@ -24,8 +24,8 @@ export const experience: { name: string; years: string; role: string; photo: str
     name: "Mastercard", years: "2022 — 2024", role: "Software Engineer II",
     photo: "/images/experience/mastercard.jpg",
     photoPortrait: "/images/experience/mastercard-portrait.jpg",
-    // The Dublin office I worked in. Image from Mastercard's careers site.
-    credit: { text: "Mastercard, Dublin. Photo: Mastercard", href: "https://careers.mastercard.com/us/en/blogarticle/10-reasons-to-join-mastercard-in-dublin-ireland" },
+    // Lobby of the Dublin office I worked in (photo supplied by Kunal).
+    credit: { text: "Mastercard, Dublin" },
     paras: [
       ["Built ", { hl: "real-time data ingestion on Kafka" }, ", and a reporting plugin other teams adopted with ", { hl: "zero code changes" }, "."],
       ["Mentored the junior engineers on the team."],

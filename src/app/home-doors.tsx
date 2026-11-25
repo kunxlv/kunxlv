@@ -5,7 +5,7 @@ import { TLink } from "@/components/tlink";
 
 const DOORS = [
   { href: "/builds", name: "Builds", peek: "systms, Onyx, Reckoner and TimeSync", bg: "#1a1a1a", fg: "#fff", morphBg: "#000" },
-  { href: "/experience", name: "Experience", peek: "Squarespace, IBM and Mastercard", bg: "#2f2f2f", fg: "#fff", morphBg: "#fff" },
+  { href: "/experience", name: "Experience", peek: "Squarespace, IBM and Mastercard", bg: "#2f2f2f", fg: "#fff", image: "/images/experience/squarespace-portrait.jpg", pos: "36% 74%", shade: 0.15, morphBg: "#fff" },
   { href: "/writing", name: "Writing", peek: "Posts from Medium", bg: "#f4f4f4", fg: "#000", morphBg: "#fff" },
   { href: "/life", name: "Life", peek: "Photo albums and the stories behind them", bg: "#2f2f2f", fg: "#fff", image: "/images/photo-land.jpg", shade: 0.25, morphBg: "#2f2f2f" },
   { href: "/contact", name: "Contact", peek: "Email, socials and a message form", bg: "#2f2f2f", fg: "#fff", image: "/images/photo-wide.jpg", shade: 0.45, morphBg: "#2f2f2f" },
@@ -29,7 +29,7 @@ export function HomeDoors({ lifeCover }: { lifeCover?: string }) {
             className="kv-door"
             style={{
               position: "relative", flex: `${hover ? (active ? 3 : 0.75) : 1} 1 0`, minWidth: 0, borderRadius: 6, overflow: "hidden",
-              backgroundColor: d.bg, backgroundImage: d.image ? `url(${d.image})` : undefined, backgroundSize: "cover", backgroundPosition: "center",
+              backgroundColor: d.bg, backgroundImage: d.image ? `url(${d.image})` : undefined, backgroundSize: "cover", backgroundPosition: d.pos ?? "center",
               color: d.fg, padding: 20, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "flex-end",
               textDecoration: "none", transition: "flex-grow 700ms var(--ease)",
             }}
