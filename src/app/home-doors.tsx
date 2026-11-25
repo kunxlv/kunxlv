@@ -12,12 +12,15 @@ const DOORS = [
 ];
 
 /** lifeCover: cover of the first album on the Life page, so the card always previews it. */
-export function HomeDoors({ lifeCover }: { lifeCover?: string }) {
+export function HomeDoors({ lifeCover, buildsCover }: { lifeCover?: string; buildsCover?: string }) {
   const [hover, setHover] = useState<string | null>(null);
   return (
     <nav aria-label="Pages" onMouseLeave={() => setHover(null)} className="kv-doors" style={{ marginTop: "auto", paddingTop: 48, display: "flex", gap: 12, height: "clamp(300px, 46vh, 480px)" }}>
       {DOORS.map((door) => {
-        const d = door.href === "/life" && lifeCover ? { ...door, image: lifeCover } : door;
+        const d =
+          door.href === "/life" && lifeCover ? { ...door, image: lifeCover }
+          : door.href === "/builds" && buildsCover ? { ...door, image: buildsCover, pos: "12% 30%", shade: 0.3 }
+          : door;
         const active = hover === d.href;
         return (
           <TLink

@@ -1,9 +1,12 @@
 import { HomeDoors } from "./home-doors";
 import { readAlbums } from "@/lib/albums";
+import { projects } from "@/content/projects";
 
 export default async function Home() {
   // First album on the Life page; cached under the "albums" tag, so saving in the admin refreshes it.
   const lifeCover = (await readAlbums())[0]?.cover;
+  // First project on Builds that has a screenshot, so the card previews the latest build.
+  const buildsCover = projects.find((p) => p.shots?.length)?.shots?.[0].src;
   return (
     <main style={{ minHeight: "100svh", background: "#fff", color: "#000", display: "flex", flexDirection: "column", padding: "32px clamp(20px, 5vw, 64px) 40px", boxSizing: "border-box" }}>
       <p style={{ margin: 0, fontSize: 15, color: "#6b6b6b" }}>Senior backend engineer in Dublin</p>
@@ -13,7 +16,7 @@ export default async function Home() {
           I build backend systems for a living, <span style={{ color: "#000" }}>and everything else for fun.</span>
         </p>
       </div>
-      <HomeDoors lifeCover={lifeCover} />
+      <HomeDoors lifeCover={lifeCover} buildsCover={buildsCover} />
     </main>
   );
 }
