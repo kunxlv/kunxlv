@@ -141,9 +141,9 @@ export function WorkStage() {
           const off = k - i;
           const tr = jump ? "none" : `transform 1000ms cubic-bezier(0.76, 0, 0.24, 1), opacity 1000ms ease`;
           return (
-            <section key={p.slug} aria-label={p.name} aria-hidden={off !== 0} style={{ position: "absolute", inset: 0, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "40px 64px", padding: "130px clamp(20px, 5vw, 64px) 170px", boxSizing: "border-box", transform: `translateX(${off * 100}%)`, opacity: off === 0 ? 1 : 0.35, transition: tr, pointerEvents: off === 0 && open ? "auto" : "none", overflowY: "auto" }}>
+            <section key={p.slug} aria-label={p.name} aria-hidden={off !== 0} style={{ position: "absolute", inset: 0, display: "flex", flexWrap: "wrap", alignItems: "center", gap: "40px 64px", padding: "88px clamp(20px, 5vw, 64px) 184px", boxSizing: "border-box", transform: `translateX(${off * 100}%)`, opacity: off === 0 ? 1 : 0.35, transition: tr, pointerEvents: off === 0 && open ? "auto" : "none", overflowY: "auto" }}>
               <ProjectDetails p={p} />
-              <div aria-hidden="true" style={{ flex: "999 1 520px", minWidth: 0, height: 540, position: "relative", transform: `translateX(${off * 35}%)`, transition: jump ? "none" : "transform 1000ms cubic-bezier(0.76, 0, 0.24, 1)" }}>
+              <div aria-hidden="true" style={{ flex: "999 1 520px", minWidth: 0, height: "min(560px, calc(100svh - 272px))", position: "relative", transform: `translateX(${off * 35}%)`, transition: jump ? "none" : "transform 1000ms cubic-bezier(0.76, 0, 0.24, 1)" }}>
                 <ProjectVisual p={p} />
               </div>
             </section>
@@ -229,8 +229,8 @@ function ProjectVisual({ p }: { p: Project }) {
     const [front, back] = p.shots;
     return (
       <>
-        {back ? <BrowserShot shot={back} style={{ left: "26%", top: "4%", width: "72%", transform: "rotate(3deg)", opacity: 0.9 }} /> : null}
-        <BrowserShot shot={front} style={back ? { left: "2%", top: "22%", width: "78%" } : { left: "6%", top: "10%", width: "88%" }} />
+        {back ? <BrowserShot shot={back} style={{ right: "0%", top: "2%", height: "70%", transform: "rotate(3deg)", opacity: 0.9 }} /> : null}
+        <BrowserShot shot={front} style={back ? { left: "2%", bottom: "0%", height: "80%" } : { left: "50%", top: "50%", height: "90%", transform: "translate(-50%, -50%)" }} />
       </>
     );
   }
@@ -269,12 +269,12 @@ function ProjectVisual({ p }: { p: Project }) {
 
 function BrowserShot({ shot, style }: { shot: { src: string; url: string }; style: React.CSSProperties }) {
   return (
-    <figure style={{ position: "absolute", margin: 0, borderRadius: 10, overflow: "hidden", background: "#fff", boxShadow: "0 30px 70px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.08)", ...style }}>
-      <div style={{ height: 30, display: "flex", alignItems: "center", gap: 6, padding: "0 12px", background: "#f1f1f1", borderBottom: "1px solid #e2e2e2" }}>
+    <figure style={{ position: "absolute", margin: 0, borderRadius: 10, overflow: "hidden", background: "#fff", boxShadow: "0 30px 70px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.08)", aspectRatio: "1440 / 930", maxWidth: "100%", display: "flex", flexDirection: "column", ...style }}>
+      <div style={{ height: 30, flex: "none", display: "flex", alignItems: "center", gap: 6, padding: "0 12px", background: "#f1f1f1", borderBottom: "1px solid #e2e2e2" }}>
         {[0, 1, 2].map((k) => <span key={k} style={{ width: 9, height: 9, borderRadius: "50%", background: "#d0d0d0" }} />)}
         <span style={{ marginLeft: 10, flex: 1, height: 18, borderRadius: 5, background: "#fff", fontSize: 11, color: "#6b6b6b", display: "flex", alignItems: "center", padding: "0 8px", overflow: "hidden", whiteSpace: "nowrap" }}>{shot.url}</span>
       </div>
-      <img src={shot.src} alt={`Screenshot of ${shot.url}`} loading="lazy" style={{ display: "block", width: "100%", aspectRatio: "16 / 10", objectFit: "cover", objectPosition: "top left" }} />
+      <img src={shot.src} alt={`Screenshot of ${shot.url}`} loading="lazy" style={{ display: "block", width: "100%", flex: 1, minHeight: 0, objectFit: "cover", objectPosition: "top left" }} />
     </figure>
   );
 }
