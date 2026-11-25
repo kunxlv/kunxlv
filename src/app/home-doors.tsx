@@ -6,20 +6,19 @@ import { TLink } from "@/components/tlink";
 const DOORS = [
   { href: "/builds", name: "Builds", peek: "systms, Onyx, Reckoner and TimeSync", bg: "#1a1a1a", fg: "#fff", morphBg: "#000" },
   { href: "/experience", name: "Experience", peek: "Squarespace, IBM and Mastercard", bg: "#2f2f2f", fg: "#fff", image: "/images/experience/squarespace-portrait.jpg", pos: "36% 74%", shade: 0.15, morphBg: "#fff" },
-  { href: "/writing", name: "Writing", peek: "Posts from Medium", bg: "#f4f4f4", fg: "#000", morphBg: "#fff" },
+  { href: "/writing", name: "Writing", peek: "Posts from Medium", bg: "#1a1a1a", fg: "#fff", morphBg: "#fff" },
   { href: "/life", name: "Life", peek: "Photo albums and the stories behind them", bg: "#2f2f2f", fg: "#fff", image: "/images/photo-land.jpg", shade: 0.25, morphBg: "#2f2f2f" },
   { href: "/contact", name: "Contact", peek: "Email, socials and a message form", bg: "#2f2f2f", fg: "#fff", image: "/images/photo-wide.jpg", shade: 0.45, morphBg: "#2f2f2f" },
 ];
 
 /** lifeCover: cover of the first album on the Life page, so the card always previews it. */
-export function HomeDoors({ lifeCover, buildsCover }: { lifeCover?: string; buildsCover?: string }) {
+export function HomeDoors({ lifeCover }: { lifeCover?: string }) {
   const [hover, setHover] = useState<string | null>(null);
   return (
     <nav aria-label="Pages" onMouseLeave={() => setHover(null)} className="kv-doors" style={{ marginTop: "auto", paddingTop: 48, display: "flex", gap: 12, height: "clamp(300px, 46vh, 480px)" }}>
       {DOORS.map((door) => {
         const d =
           door.href === "/life" && lifeCover ? { ...door, image: lifeCover }
-          : door.href === "/builds" && buildsCover ? { ...door, image: buildsCover, pos: "12% 30%", shade: 0.3 }
           : door;
         const active = hover === d.href;
         return (
