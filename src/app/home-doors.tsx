@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TLink } from "@/components/tlink";
 
 const DOORS = [
-  { href: "/work", name: "Work", peek: "systms, Onyx, Reckoner and TimeSync", bg: "#1a1a1a", fg: "#fff", morphBg: "#000" },
+  { href: "/builds", name: "Builds", peek: "systms, Onyx, Reckoner and TimeSync", bg: "#1a1a1a", fg: "#fff", morphBg: "#000" },
   { href: "/experience", name: "Experience", peek: "Squarespace, IBM and Mastercard", bg: "#2f2f2f", fg: "#fff", morphBg: "#fff" },
   { href: "/writing", name: "Writing", peek: "Posts from Medium", bg: "#f4f4f4", fg: "#000", morphBg: "#fff" },
   { href: "/life", name: "Life", peek: "Photo albums and the stories behind them", bg: "#2f2f2f", fg: "#fff", image: "/images/photo-land.jpg", shade: 0.25, morphBg: "#2f2f2f" },

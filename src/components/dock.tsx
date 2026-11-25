@@ -5,7 +5,7 @@ import { TLink } from "./tlink";
 
 const ITEMS = [
   { href: "/", label: "Home" },
-  { href: "/work", label: "Work" },
+  { href: "/builds", label: "Builds" },
   { href: "/experience", label: "Experience" },
   { href: "/writing", label: "Writing" },
   { href: "/life", label: "Life" },

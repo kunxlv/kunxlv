@@ -29,7 +29,7 @@ export const projects: Project[] = [
     links: [{ label: "Read the write-up", href: "/writing", primary: true }],
     visual: "system",
     // Homebase in demo mode, running on onyx.
-    shots: [{ src: "/images/work/homebase-home.jpg", url: "homebase, on onyx" }],
+    shots: [{ src: "/images/builds/homebase-home.jpg", url: "homebase, on onyx" }],
   },
   {
     slug: "reckoner", name: "Reckoner", kind: "Web tool",
@@ -39,8 +39,8 @@ export const projects: Project[] = [
     links: [{ label: "Visit reckoner.tools ↗", href: "https://reckoner.tools", primary: true }, { label: "GitHub", href: "https://github.com/kunxlv/reckoner" }],
     visual: "browser",
     shots: [
-      { src: "/images/work/reckoner-mortgage.jpg", url: "reckoner.tools/ie/property/mortgage-calculator" },
-      { src: "/images/work/reckoner-home.jpg", url: "reckoner.tools" },
+      { src: "/images/builds/reckoner-mortgage.jpg", url: "reckoner.tools/ie/property/mortgage-calculator" },
+      { src: "/images/builds/reckoner-home.jpg", url: "reckoner.tools" },
     ],
   },
   {
@@ -51,8 +51,8 @@ export const projects: Project[] = [
     links: [{ label: "Visit timesync.tools ↗", href: "https://www.timesync.tools", primary: true }, { label: "GitHub", href: "https://github.com/kunxlv/timesync" }],
     visual: "browser",
     shots: [
-      { src: "/images/work/timesync-planner.jpg", url: "timesync.tools" },
-      { src: "/images/work/timesync-pair.jpg", url: "timesync.tools/meet/london-and-new-york" },
+      { src: "/images/builds/timesync-planner.jpg", url: "timesync.tools" },
+      { src: "/images/builds/timesync-pair.jpg", url: "timesync.tools/meet/london-and-new-york" },
     ],
   },
 ];
