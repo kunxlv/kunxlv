@@ -233,7 +233,8 @@ function ProjectVisual({ p }: { p: Project }) {
         <BrowserShot shot={front} style={back ? { left: "2%", top: "22%", width: "78%" } : { left: "6%", top: "10%", width: "88%" }} />
       </>
     );
-  }  if (p.visual === "system") {
+  }
+  if (p.visual === "system") {
     return (
       <div style={{ position: "absolute", left: "14%", top: "8%", width: "72%", height: "82%", borderRadius: 18, background: "#1a1a1a", color: "#fff", boxShadow: "0 24px 60px rgba(0,0,0,0.2)", padding: 36, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "center", gap: 14, fontSize: 16 }}>
         <div style={{ border: "1px solid #555", borderRadius: 10, padding: "14px 18px" }}>You, anywhere</div>
