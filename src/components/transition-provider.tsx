@@ -4,7 +4,9 @@ import { createContext, Suspense, useCallback, useContext, useEffect, useRef, ty
 import { usePathname, useRouter } from "next/navigation";
 
 export type Morph = { rect: DOMRect; background: string; image?: string };
-type Ctx = { navigate: (href: string, morph?: Morph) => void; prefetch: (href: string) => void };
+/** Where the next page slides in from during the card transition. */
+export type Direction = "up" | "left" | "right";
+type Ctx = { navigate: (href: string, morph?: Morph, direction?: Direction) => void; prefetch: (href: string) => void };
 
 const TransitionContext = createContext<Ctx | null>(null);
 const EASE = "cubic-bezier(0.65, 0, 0.35, 1)";
@@ -63,7 +65,7 @@ export function TransitionProvider({ children, chrome }: { children: ReactNode; 
   );
 
   const navigate = useCallback(
-    async (href: string, morph?: Morph) => {
+    async (href: string, morph?: Morph, direction: Direction = "up") => {
       const target = href.split("#")[0];
       if (busy.current || target === window.location.pathname) return;
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -114,13 +116,14 @@ export function TransitionProvider({ children, chrome }: { children: ReactNode; 
           window.scrollTo(0, 0);
           await frame();
           enterTitles(true);
-          const sheet = el({ position: "absolute", inset: "0", overflow: "hidden", transform: "translateY(100%)", background: "#fff" });
+          const from = direction === "left" ? "translateX(-100%)" : direction === "right" ? "translateX(100%)" : "translateY(100%)";
+          const sheet = el({ position: "absolute", inset: "0", overflow: "hidden", transform: from, background: "#fff" });
           const next = snapshot();
           if (next) sheet.appendChild(next);
           card.appendChild(sheet);
           await frame();
           sheet.style.transition = `transform 640ms ${EASE}`;
-          sheet.style.transform = "translateY(0)";
+          sheet.style.transform = "translate(0, 0)";
           await wait(660);
           card.style.transform = "scale(1)";
           card.style.borderRadius = "0px";

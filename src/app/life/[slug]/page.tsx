@@ -51,8 +51,8 @@ export default async function AlbumPage({ params }: PageProps<"/life/[slug]">) {
         })}
       </div>
 
-      {prev ? <TLink href={`/life/${prev.slug}`} aria-label="Previous album" className="kv-glass" style={{ position: "fixed", left: "clamp(12px, 1.6vw, 28px)", top: "50%", transform: "translateY(-50%)", width: 48, height: 48, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 5 }}><Arrow dir="prev" /></TLink> : null}
-      {next ? <TLink href={`/life/${next.slug}`} aria-label="Next album" className="kv-glass" style={{ position: "fixed", right: "clamp(12px, 1.6vw, 28px)", top: "50%", transform: "translateY(-50%)", width: 48, height: 48, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 5 }}><Arrow dir="next" /></TLink> : null}
+      {prev ? <TLink href={`/life/${prev.slug}`} direction="left" aria-label="Previous album" className="kv-glass" style={{ position: "fixed", left: "clamp(12px, 1.6vw, 28px)", top: "50%", transform: "translateY(-50%)", width: 48, height: 48, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 5 }}><Arrow dir="prev" /></TLink> : null}
+      {next ? <TLink href={`/life/${next.slug}`} direction="right" aria-label="Next album" className="kv-glass" style={{ position: "fixed", right: "clamp(12px, 1.6vw, 28px)", top: "50%", transform: "translateY(-50%)", width: 48, height: 48, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 5 }}><Arrow dir="next" /></TLink> : null}
 
       <SiteFooter />
     </main>
