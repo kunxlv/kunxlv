@@ -8,6 +8,8 @@ export type Project = {
   facts: { k: string; v: string }[];
   links: { label: string; href: string; primary?: boolean }[];
   visual: "phones" | "browser" | "system";
+  /** Real screenshots, front one first. Also used as the tile image. */
+  shots?: { src: string; url: string }[];
 };
 
 export const projects: Project[] = [
@@ -30,10 +32,14 @@ export const projects: Project[] = [
   {
     slug: "reckoner", name: "Reckoner", kind: "Web tool",
     tile: { bg: "#f4f4f4", fg: "#000", sub: "#6b6b6b" },
-    text: ["Personal finance calculators for ", { hl: "10+ countries" }, ", with currency conversion and results shown as ", { hl: "interactive charts" }, " instead of a single number."],
+    text: ["Personal finance calculators for ", { hl: "12 countries" }, ", with currency conversion and results shown as ", { hl: "interactive charts" }, " instead of a single number."],
     facts: [{ k: "Live at", v: "reckoner.tools" }, { k: "Stack", v: "Next.js, Vercel" }, { k: "Status", v: "Live" }],
     links: [{ label: "Visit reckoner.tools ↗", href: "https://reckoner.tools", primary: true }, { label: "GitHub", href: "https://github.com/kunxlv/reckoner" }],
     visual: "browser",
+    shots: [
+      { src: "/images/work/reckoner-mortgage.jpg", url: "reckoner.tools/ie/property/mortgage-calculator" },
+      { src: "/images/work/reckoner-home.jpg", url: "reckoner.tools" },
+    ],
   },
   {
     slug: "timesync", name: "TimeSync", kind: "Web tool",
@@ -42,5 +48,9 @@ export const projects: Project[] = [
     facts: [{ k: "Live at", v: "timesync.tools" }, { k: "Stack", v: "Next.js, TypeScript" }, { k: "Status", v: "Live" }],
     links: [{ label: "Visit timesync.tools ↗", href: "https://www.timesync.tools", primary: true }, { label: "GitHub", href: "https://github.com/kunxlv/timesync" }],
     visual: "browser",
+    shots: [
+      { src: "/images/work/timesync-planner.jpg", url: "timesync.tools" },
+      { src: "/images/work/timesync-pair.jpg", url: "timesync.tools/meet/london-and-new-york" },
+    ],
   },
 ];

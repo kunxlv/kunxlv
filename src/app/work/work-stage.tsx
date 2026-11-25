@@ -124,9 +124,10 @@ export function WorkStage() {
             <div ref={stripRef} className="kv-strip" style={{ display: "flex", gap: GAP, width: "max-content", animationPlayState: phase === "idle" ? "running" : "paused" }}>
               {strip.map((p, j) => (
                 <button key={j} type="button" className="kv-tile" data-pid={projects.indexOf(p)} onClick={(e) => openFrom(e, projects.indexOf(p))} aria-label={`Open ${p.name}`}
-                  style={{ flex: "none", width: TILE, height: TILE, border: 0, borderRadius: 6, background: p.tile.bg, color: p.tile.fg, padding: 28, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "flex-start", textAlign: "left", fontFamily: "inherit", cursor: "pointer" }}>
-                  <span className="kv-tag kv-glass-dark">{p.kind}</span>
-                  <span style={{ fontSize: 52, fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1 }}>{p.name}</span>
+                  style={{ flex: "none", width: TILE, height: TILE, border: 0, borderRadius: 6, position: "relative", overflow: "hidden", background: p.shots?.length ? `#111 url(${p.shots[0].src}) left top / cover` : p.tile.bg, color: p.shots?.length ? "#fff" : p.tile.fg, padding: 28, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "flex-start", textAlign: "left", fontFamily: "inherit", cursor: "pointer" }}>
+                  {p.shots?.length ? <span aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0) 55%)" }} /> : null}
+                  <span className="kv-tag kv-glass-dark" style={{ position: "relative" }}>{p.kind}</span>
+                  <span style={{ position: "relative", fontSize: 52, fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1 }}>{p.name}</span>
                 </button>
               ))}
             </div>
@@ -165,8 +166,11 @@ export function WorkStage() {
             borderRadius: isFull ? 0 : 6, background: isFull ? "#f4f4f4" : cur.tile.bg, overflow: "hidden",
             transition: still ? "none" : ["left", "top", "width", "height", "border-radius", "background-color"].map((p) => `${p} ${D}ms ${E}`).join(", "),
           }}>
-            <span className="kv-label" style={{ position: "absolute", left: 28, top: 28, color: cur.tile.sub, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease", whiteSpace: "nowrap" }}>{cur.kind}</span>
-            <span style={{ position: "absolute", left: 28, bottom: 28, fontSize: 52, fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1, color: cur.tile.fg, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease", whiteSpace: "nowrap" }}>{cur.name}</span>
+            {cur.shots?.length ? (
+              <span style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0) 55%), #111 url(${cur.shots[0].src}) left top / cover`, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease" }} />
+            ) : null}
+            <span className={cur.shots?.length ? "kv-tag kv-glass-dark" : "kv-label"} style={{ position: "absolute", left: 28, top: 28, color: cur.shots?.length ? "#fff" : cur.tile.sub, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease", whiteSpace: "nowrap" }}>{cur.kind}</span>
+            <span style={{ position: "absolute", left: 28, bottom: 28, fontSize: 52, fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1, color: cur.shots?.length ? "#fff" : cur.tile.fg, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease", whiteSpace: "nowrap" }}>{cur.name}</span>
           </div>
         </div>
       </div>
@@ -244,11 +248,32 @@ function ProjectVisual({ p }: { p: Project }) {
       </>
     );
   }
+  if (p.shots?.length) {
+    const [front, back] = p.shots;
+    return (
+      <>
+        {back ? <BrowserShot shot={back} style={{ left: "26%", top: "4%", width: "72%", transform: "rotate(3deg)", opacity: 0.9 }} /> : null}
+        <BrowserShot shot={front} style={{ left: "2%", top: "22%", width: "78%" }} />
+      </>
+    );
+  }
   return (
     <>
       <Card label="[Screenshot]" style={{ left: 0, top: "18%", width: "58%", height: "58%", transform: "rotate(-7deg)", background: "#dadad4" }} />
       <Card label="[Screenshot]" style={{ left: "40%", top: "30%", width: "58%", height: "58%", transform: "rotate(6deg)", background: "#cfcfca" }} />
       <Card label="[Screenshot]" style={{ left: "16%", top: "6%", width: "66%", height: "62%", background: "#fff" }} />
     </>
+  );
+}
+
+function BrowserShot({ shot, style }: { shot: { src: string; url: string }; style: React.CSSProperties }) {
+  return (
+    <figure style={{ position: "absolute", margin: 0, borderRadius: 10, overflow: "hidden", background: "#fff", boxShadow: "0 30px 70px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.08)", ...style }}>
+      <div style={{ height: 30, display: "flex", alignItems: "center", gap: 6, padding: "0 12px", background: "#f1f1f1", borderBottom: "1px solid #e2e2e2" }}>
+        {[0, 1, 2].map((k) => <span key={k} style={{ width: 9, height: 9, borderRadius: "50%", background: "#d0d0d0" }} />)}
+        <span style={{ marginLeft: 10, flex: 1, height: 18, borderRadius: 5, background: "#fff", fontSize: 11, color: "#6b6b6b", display: "flex", alignItems: "center", padding: "0 8px", overflow: "hidden", whiteSpace: "nowrap" }}>{shot.url}</span>
+      </div>
+      <img src={shot.src} alt={`Screenshot of ${shot.url}`} loading="lazy" style={{ display: "block", width: "100%", aspectRatio: "16 / 10", objectFit: "cover", objectPosition: "top left" }} />
+    </figure>
   );
 }
