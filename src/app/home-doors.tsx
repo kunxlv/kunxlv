@@ -11,11 +11,13 @@ const DOORS = [
   { href: "/contact", name: "Contact", peek: "Email, socials and a message form", bg: "#2f2f2f", fg: "#fff", image: "/images/photo-wide.jpg", shade: 0.45, morphBg: "#2f2f2f" },
 ];
 
-export function HomeDoors() {
+/** lifeCover: cover of the first album on the Life page, so the card always previews it. */
+export function HomeDoors({ lifeCover }: { lifeCover?: string }) {
   const [hover, setHover] = useState<string | null>(null);
   return (
     <nav aria-label="Pages" onMouseLeave={() => setHover(null)} className="kv-doors" style={{ marginTop: "auto", paddingTop: 48, display: "flex", gap: 12, height: "clamp(300px, 46vh, 480px)" }}>
-      {DOORS.map((d) => {
+      {DOORS.map((door) => {
+        const d = door.href === "/life" && lifeCover ? { ...door, image: lifeCover } : door;
         const active = hover === d.href;
         return (
           <TLink
