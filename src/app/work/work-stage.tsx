@@ -125,7 +125,7 @@ export function WorkStage() {
               {strip.map((p, j) => (
                 <button key={j} type="button" className="kv-tile" data-pid={projects.indexOf(p)} onClick={(e) => openFrom(e, projects.indexOf(p))} aria-label={`Open ${p.name}`}
                   style={{ flex: "none", width: TILE, height: TILE, border: 0, borderRadius: 6, background: p.tile.bg, color: p.tile.fg, padding: 28, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "flex-start", textAlign: "left", fontFamily: "inherit", cursor: "pointer" }}>
-                  <span className="kv-label" style={{ fontSize: 13, color: p.tile.sub }}>{p.kind}</span>
+                  <span className="kv-tag kv-glass-dark">{p.kind}</span>
                   <span style={{ fontSize: 52, fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1 }}>{p.name}</span>
                 </button>
               ))}
@@ -187,7 +187,7 @@ export function WorkStage() {
 
 function RoundButton({ label, onClick, disabled, children }: { label: string; onClick: () => void; disabled: boolean; children: React.ReactNode }) {
   return (
-    <button type="button" onClick={onClick} disabled={disabled} aria-label={label} style={{ width: 48, height: 48, borderRadius: "50%", border: "1px solid #000", background: "transparent", display: "flex", alignItems: "center", justifyContent: "center", cursor: disabled ? "default" : "pointer", opacity: disabled ? 0.3 : 1 }}>
+    <button type="button" onClick={onClick} disabled={disabled} aria-label={label} className="kv-glass" style={{ width: 48, height: 48, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: disabled ? "default" : "pointer", opacity: disabled ? 0.3 : 1 }}>
       <svg width="10" height="16" viewBox="0 0 10 16" aria-hidden="true">{children}</svg>
     </button>
   );

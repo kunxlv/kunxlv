@@ -53,14 +53,14 @@ export function ExperienceScenes() {
               {c.photo ? <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${c.photo})`, backgroundSize: "cover", backgroundPosition: "center" }} /> : null}
               <span style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.2) 100%)" }} />
               <div style={{ position: "absolute", left: "clamp(24px, 5vw, 72px)", right: "clamp(24px, 5vw, 72px)", bottom: 120, display: "flex", flexDirection: "column", gap: 14, opacity: textOp, transform: `translateY(${((1 - textOp) * 24).toFixed(1)}px)` }}>
-                <span className="kv-label" style={{ fontSize: 15, fontWeight: 500, color: "rgba(255,255,255,0.85)" }}>{c.role}, {c.years}</span>
+                <span className="kv-tag kv-glass-dark" style={{ alignSelf: "flex-start", height: 34, fontSize: 14 }}>{c.role}, {c.years}</span>
                 <h2 style={{ margin: 0, fontSize: "clamp(64px, 11vw, 168px)", fontWeight: 600, letterSpacing: "-0.055em", lineHeight: 0.9 }}>{c.name}</h2>
                 <div style={{ marginTop: 8, maxWidth: 820, display: "flex", flexDirection: "column", gap: 12, fontSize: "clamp(18px, 1.7vw, 24px)", lineHeight: 1.5, color: "rgba(255,255,255,0.88)" }}>
                   {c.paras.map((para, j) => <p key={j} style={{ margin: 0 }}><Segments parts={para} hlStyle={{ color: "#fff", textUnderlineOffset: 5 }} /></p>)}
                 </div>
               </div>
               {c.credit ? (
-                <a href={c.credit.href} target="_blank" rel="noreferrer" style={{ position: "absolute", right: "clamp(24px, 5vw, 72px)", top: 32, fontSize: 12, color: "rgba(255,255,255,0.7)", textDecoration: "none", opacity: textOp }}>{c.credit.text}</a>
+                <a href={c.credit.href} target="_blank" rel="noreferrer" className="kv-tag kv-glass-dark" style={{ position: "absolute", right: "clamp(24px, 5vw, 72px)", top: 28, height: 26, padding: "0 12px", fontSize: 12, color: "rgba(255,255,255,0.85)", textDecoration: "none", opacity: textOp }}>{c.credit.text}</a>
               ) : null}
               <span style={{ position: "absolute", inset: 0, background: "#000", opacity: 0.6 * cover, pointerEvents: "none" }} />
             </section>

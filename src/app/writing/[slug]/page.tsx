@@ -30,8 +30,8 @@ async function PostBody({ params }: { params: Promise<{ slug: string }> }) {
       <header style={{ position: "relative", minHeight: "min(760px, 90svh)", color: "#fff", display: "flex", flexDirection: "column", justifyContent: "space-between", backgroundColor: "#2f2f2f", backgroundImage: post.cover ? `url(${post.cover})` : undefined, backgroundSize: "cover", backgroundPosition: "center" }}>
         <span style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.35)" }} />
         <div style={{ position: "relative", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, padding: "32px clamp(20px, 5vw, 48px)" }}>
-          <TLink href="/writing" style={{ fontSize: 15, fontWeight: 500, color: "#fff", textDecoration: "none" }}>← Writing</TLink>
-          <a href={post.url} target="_blank" rel="noreferrer" style={{ fontSize: 15, fontWeight: 500, color: "#fff", textUnderlineOffset: 5 }}>Read on Medium ↗</a>
+          <TLink href="/writing" className="kv-tag kv-glass-dark" style={{ height: 40, padding: "0 18px", fontSize: 15, textDecoration: "none" }}>← Writing</TLink>
+          <a href={post.url} target="_blank" rel="noreferrer" className="kv-tag kv-glass-dark" style={{ height: 40, padding: "0 18px", fontSize: 15, textDecoration: "none" }}>Read on Medium ↗</a>
         </div>
         <div data-kv-title style={{ position: "relative", width: "100%", maxWidth: 760, margin: "0 auto", padding: "0 clamp(20px, 5vw, 48px) 72px", boxSizing: "border-box", display: "flex", flexDirection: "column", gap: 18 }}>
           <span style={{ fontSize: 14, color: "rgba(255,255,255,0.85)" }}>{post.date}{post.readingTime ? `, ${post.readingTime} min read` : ""}</span>

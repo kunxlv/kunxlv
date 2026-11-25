@@ -68,3 +68,24 @@ html.kv-entering-late [data-kv-title] { animation-delay: 600ms; }
   .kv-doors { flex-direction: column; height: auto !important; }
   .kv-doors .kv-door { flex: none !important; height: 120px; }
 }
+
+/* Glass, Squarespace-style: only on small things that float over photos.
+   Light = controls (arrows, close). Dark = tags and links on top of imagery. */
+.kv-glass {
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(221, 221, 221, 0.9);
+  color: #000;
+}
+.kv-glass-dark {
+  background: rgba(0, 0, 0, 0.54);
+  -webkit-backdrop-filter: blur(25px) saturate(1.2);
+  backdrop-filter: blur(25px) saturate(1.2);
+  color: #fff;
+}
+.kv-tag { display: inline-flex; align-items: center; height: 30px; padding: 0 14px; border-radius: 30px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .kv-glass { background: rgba(255, 255, 255, 0.92); }
+  .kv-glass-dark { background: rgba(0, 0, 0, 0.78); }
+}
