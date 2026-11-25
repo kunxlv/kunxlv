@@ -37,8 +37,8 @@ export function Dock() {
             tabIndex={onHome ? -1 : undefined}
             aria-current={active ? "page" : undefined}
             style={{
-              display: "inline-flex", alignItems: "center", height: 44, padding: "0 clamp(8px, 2.6vw, 16px)", color: "#fff",
-              fontSize: "clamp(13px, 3.6vw, 15px)", fontWeight: active ? 600 : 500, whiteSpace: "nowrap",
+              display: "inline-flex", alignItems: "center", height: 44, padding: "0 clamp(6px, 2vw, 16px)", color: "#fff",
+              fontSize: "clamp(12.5px, 3.4vw, 15px)", fontWeight: active ? 600 : 500, whiteSpace: "nowrap",
               textDecoration: active ? "underline" : "none", textDecorationThickness: "1.5px", textUnderlineOffset: 7,
             }}
           >
