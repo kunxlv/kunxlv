@@ -1,28 +1,91 @@
 @import "tailwindcss";
 
 :root {
-  --background: #07070a;
-  --foreground: #ececf1;
-  --muted: #8a8a99;
-  --accent: #ff3b2f;
+  --white: #ffffff;
+  --mist: #f4f4f4;
+  --fog: #dddddd;
+  --slate: #6b6b6b;
+  --graphite: #2f2f2f;
+  --charcoal: #1a1a1a;
+  --black: #000000;
+  /* Swap fonts in one place */
+  --font-heading: "Urbanist Variable", system-ui, sans-serif;
+  --font-body: "Urbanist Variable", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-
+html { background: #000; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  margin: 0;
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--font-heading); }
+::selection { background: #000; color: #fff; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.kv-door:focus-visible, .kv-tile:focus-visible { outline-offset: -6px; }
+
+.kv-label { font-size: 14px; font-weight: 500; letter-spacing: 0; }
+/* Spaced capitals are reserved for the Life pages (the george-zhang look) */
+.kv-caps { font-size: 13px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; }
+.kv-btn {
+  display: inline-flex; align-items: center; height: 52px; padding: 0 28px; border: 1px solid #000;
+  background: #000; color: #fff; text-decoration: none; font-size: 16px; font-weight: 600;
+  letter-spacing: -0.005em; cursor: pointer; font-family: inherit;
+}
+.kv-btn--ghost { background: transparent; color: #000; }
+.kv-hl { color: #000; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+/* Title rise after a page transition */
+@keyframes kv-title-in { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+html.kv-entering [data-kv-title] { animation: kv-title-in 700ms var(--ease) both; }
+
+/* Reading view */
+.kv-prose { font-size: 19px; line-height: 1.75; color: #2f2f2f; }
+.kv-prose > * + * { margin-top: 28px; }
+.kv-prose p { margin: 0; }
+.kv-prose h1, .kv-prose h2, .kv-prose h3, .kv-prose h4 { margin: 48px 0 0; font-size: 30px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; color: #000; }
+.kv-prose a { color: #000; text-underline-offset: 4px; }
+.kv-prose strong, .kv-prose b { color: #000; font-weight: 600; }
+.kv-prose img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.kv-prose figure { margin: 40px 0 0; }
+.kv-prose figcaption { margin-top: 12px; font-size: 15px; color: var(--slate); }
+.kv-prose pre { margin: 0; padding: 24px; background: var(--mist); border-radius: 6px; overflow-x: auto; font-family: var(--font-mono); font-size: 15px; line-height: 1.6; color: #000; }
+.kv-prose code { font-family: var(--font-mono); font-size: 0.85em; }
+.kv-prose blockquote { margin: 40px 0 0; padding: 0; font-size: 28px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.35; color: #000; }
+.kv-prose ul, .kv-prose ol { padding-left: 1.2em; }
+.kv-prose hr { border: 0; border-top: 1px solid var(--fog); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+}
+html.kv-entering-late [data-kv-title] { animation-delay: 600ms; }
+@media (max-width: 760px) {
+  .kv-doors { flex-direction: column; height: auto !important; }
+  .kv-doors .kv-door { flex: none !important; height: 120px; }
 }
 
-::selection { background: var(--accent); color: #fff; }
+/* Glass, Squarespace-style: only on small things that float over photos.
+   Light = controls (arrows, close). Dark = tags and links on top of imagery. */
+.kv-glass {
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(221, 221, 221, 0.9);
+  color: #000;
+}
+.kv-glass-dark {
+  background: rgba(0, 0, 0, 0.54);
+  -webkit-backdrop-filter: blur(25px) saturate(1.2);
+  backdrop-filter: blur(25px) saturate(1.2);
+  color: #fff;
+}
+.kv-tag { display: inline-flex; align-items: center; height: 30px; padding: 0 14px; border-radius: 30px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .kv-glass { background: rgba(255, 255, 255, 0.92); }
+  .kv-glass-dark { background: rgba(0, 0, 0, 0.78); }
+}
