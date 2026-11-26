@@ -21,6 +21,15 @@ export function WorkStage() {
   const [jump, setJump] = useState(false);
   const [box, setBox] = useState({ l: 0, t: 0 });
   const [size, setSize] = useState({ W: 1440, H: 900 });
+  // The strip sits midway between the intro text and the nav bar, so tall screens don't leave a gap below it.
+  const [vh, setVh] = useState(900);
+  useEffect(() => {
+    const onResize = () => setVh(window.innerHeight);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  const stripTop = Math.max(470, Math.round(vh / 2 + 30));
   const [titleScale, setTitleScale] = useState(0.15);
   const tilt = 58;
   const n = projects.length;
@@ -119,7 +128,7 @@ export function WorkStage() {
       `}</style>
 
       <div aria-hidden={moving} style={{ position: "absolute", inset: 0, opacity: moving ? 0 : 1, transition: "opacity 500ms ease", pointerEvents: moving ? "none" : "auto" }}>
-        <div style={{ position: "absolute", left: 0, right: 0, top: 470, height: TILE, perspective: 1400 }}>
+        <div style={{ position: "absolute", left: 0, right: 0, top: stripTop, height: TILE, perspective: 1400 }}>
           <div style={{ transform: `rotateX(${tilt}deg)`, transformOrigin: "50% 0%" }}>
             <div ref={stripRef} className="kv-strip" style={{ display: "flex", gap: GAP, width: "max-content", animationPlayState: phase === "idle" ? "running" : "paused" }}>
               {strip.map((p, j) => (
@@ -159,10 +168,10 @@ export function WorkStage() {
       </div>
 
       {/* The card that lifts out of the floor */}
-      <div aria-hidden="true" style={{ position: "absolute", zIndex: 7, left: 0, right: 0, top: 470, height: TILE, perspective: 1400, pointerEvents: "none", opacity: phase === "idle" || phase === "done" ? 0 : 1, transition: "opacity 200ms ease" }}>
+      <div aria-hidden="true" style={{ position: "absolute", zIndex: 7, left: 0, right: 0, top: stripTop, height: TILE, perspective: 1400, pointerEvents: "none", opacity: phase === "idle" || phase === "done" ? 0 : 1, transition: "opacity 200ms ease" }}>
         <div style={{ position: "relative", height: TILE, transform: `rotateX(${isFull ? 0 : tilt}deg)`, transformOrigin: "50% 0%", transition: still ? "none" : `transform ${D}ms ${E}` }}>
           <div style={{
-            position: "absolute", left: isFull ? 0 : box.l, top: isFull ? -470 : box.t, width: isFull ? size.W : TILE, height: isFull ? size.H : TILE,
+            position: "absolute", left: isFull ? 0 : box.l, top: isFull ? -stripTop : box.t, width: isFull ? size.W : TILE, height: isFull ? size.H : TILE,
             borderRadius: isFull ? 0 : 6, background: isFull ? "#f4f4f4" : cur.tile.bg, overflow: "hidden",
             transition: still ? "none" : ["left", "top", "width", "height", "border-radius", "background-color"].map((p) => `${p} ${D}ms ${E}`).join(", "),
           }}>
