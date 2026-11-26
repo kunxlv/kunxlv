@@ -30,9 +30,13 @@ export function ExperienceScenes() {
   }, []);
 
   const e0 = ease(clamp(p, 0, 1));
-  const frac = 0.2 + 0.8 * e0;
-  const inset = ((1 - frac) * 50).toFixed(2);
-  const wordEdge = `calc(${(50 + frac * 50).toFixed(2)}% + 28px)`;
+  // Opening: "Eight years in." starts as one line with no picture. On scroll the words part
+  // and the first photo opens from a slit between them until it fills the screen.
+  const fx = e0;
+  const fy = 0.13 + 0.87 * e0;
+  const insetX = ((1 - fx) * 50).toFixed(2);
+  const insetY = ((1 - fy) * 50).toFixed(2);
+  const wordEdge = `calc(${(50 + fx * 50).toFixed(2)}% + 0.13em)`;
   const n = experience.length;
 
   return (
@@ -47,7 +51,7 @@ export function ExperienceScenes() {
           const enter = k === 0 ? 1 : ease(clamp(p - k, 0, 1));
           const cover = ease(clamp(p - (k + 1), 0, 1));
           const textOp = k === 0 ? clamp((p - 0.8) / 0.2, 0, 1) : clamp((p - k - 0.55) / 0.35, 0, 1);
-          const clip = k === 0 && p < 1 ? `inset(${inset}% ${inset}% ${inset}% ${inset}% round ${(10 * (1 - e0)).toFixed(1)}px)` : "none";
+          const clip = k === 0 && p < 1 ? `inset(${insetY}% ${insetX}% ${insetY}% ${insetX}% round ${(10 * (1 - e0)).toFixed(1)}px)` : "none";
           return (
             <section key={c.name} aria-label={c.name} style={{ position: "absolute", inset: 0, zIndex: k + 1, transform: `translateY(${((1 - enter) * 100).toFixed(2)}%) scale(${(1 - 0.08 * cover).toFixed(4)})`, transformOrigin: "50% 30%", borderRadius: `${(28 * cover).toFixed(1)}px`, clipPath: clip, overflow: "hidden", background: TONES[k % TONES.length], color: "#fff" }}>
               {c.photo ? (
