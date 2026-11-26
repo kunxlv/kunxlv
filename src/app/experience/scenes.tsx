@@ -29,6 +29,14 @@ export function ExperienceScenes() {
     return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); cancelAnimationFrame(raf); };
   }, []);
 
+  // One gesture = one scene: snap to each scene and never fly past one, however hard you scroll.
+  useEffect(() => {
+    const html = document.documentElement;
+    const prev = html.style.scrollSnapType;
+    html.style.scrollSnapType = "y mandatory";
+    return () => { html.style.scrollSnapType = prev; };
+  }, []);
+
   const e0 = ease(clamp(p, 0, 1));
   // Opening: "Eight years in." starts as one line with no picture. On scroll the words part
   // and the first photo opens from a slit between them until it fills the screen.
@@ -41,6 +49,11 @@ export function ExperienceScenes() {
 
   return (
     <main ref={ref} style={{ height: `${(n + 2.3) * 100}svh`, position: "relative", background: "#000" }}>
+      {/* Snap stops: the opening, each company fully in view, then the end panel. */}
+      {Array.from({ length: n + 1 }, (_, i) => (
+        <div key={i} aria-hidden="true" style={{ position: "absolute", left: 0, width: 1, height: 1, top: `${i * 100}svh`, scrollSnapAlign: "start", scrollSnapStop: "always" }} />
+      ))}
+      <div aria-hidden="true" style={{ position: "absolute", left: 0, width: 1, height: 1, bottom: 0, scrollSnapAlign: "end", scrollSnapStop: "always" }} />
       <div style={{ position: "sticky", top: 0, height: "100svh", overflow: "hidden", background: "#fff" }}>
         <h1 data-kv-title style={{ margin: 0, position: "absolute", inset: 0, pointerEvents: "none", fontSize: "clamp(56px, 8vw, 128px)", fontWeight: 600, letterSpacing: "-0.05em", lineHeight: 1, color: "#000" }}>
           <span style={{ position: "absolute", top: "50%", right: wordEdge, transform: "translateY(-50%)", opacity: 1 - e0 * 0.6, whiteSpace: "nowrap" }}>Eight</span>{" "}
