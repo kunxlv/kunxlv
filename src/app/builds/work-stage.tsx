@@ -133,8 +133,8 @@ export function WorkStage() {
             <div ref={stripRef} className="kv-strip" style={{ display: "flex", gap: GAP, width: "max-content", animationPlayState: phase === "idle" ? "running" : "paused" }}>
               {strip.map((p, j) => (
                 <button key={j} type="button" className="kv-tile" data-pid={projects.indexOf(p)} onClick={(e) => openFrom(e, projects.indexOf(p))} aria-label={`Open ${p.name}`}
-                  style={{ flex: "none", width: TILE, height: TILE, border: 0, borderRadius: 6, position: "relative", overflow: "hidden", background: p.shots?.length ? `#111 url(${p.shots[0].src}) left top / cover` : p.tile.bg, color: p.shots?.length ? "#fff" : p.tile.fg, padding: 28, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "flex-start", textAlign: "left", fontFamily: "inherit", cursor: "pointer" }}>
-                  {p.shots?.length ? <span aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0) 55%)" }} /> : null}
+                  style={{ flex: "none", width: TILE, height: TILE, border: 0, borderRadius: 6, position: "relative", overflow: "hidden", background: tileImage(p) ?? p.tile.bg, color: tileImage(p) ? "#fff" : p.tile.fg, padding: 28, boxSizing: "border-box", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "flex-start", textAlign: "left", fontFamily: "inherit", cursor: "pointer" }}>
+                  {tileImage(p) ? <span aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0) 55%)" }} /> : null}
                   <span className="kv-tag kv-glass-dark" style={{ position: "relative" }}>{p.kind}</span>
                   <span style={{ position: "relative", fontSize: 52, fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1 }}>{p.name}</span>
                 </button>
@@ -175,11 +175,11 @@ export function WorkStage() {
             borderRadius: isFull ? 0 : 6, background: isFull ? "#f4f4f4" : cur.tile.bg, overflow: "hidden",
             transition: still ? "none" : ["left", "top", "width", "height", "border-radius", "background-color"].map((p) => `${p} ${D}ms ${E}`).join(", "),
           }}>
-            {cur.shots?.length ? (
-              <span style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0) 55%), #111 url(${cur.shots[0].src}) left top / cover`, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease" }} />
+            {tileImage(cur) ? (
+              <span style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0) 55%), ${tileImage(cur)}`, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease" }} />
             ) : null}
-            <span className={cur.shots?.length ? "kv-tag kv-glass-dark" : "kv-label"} style={{ position: "absolute", left: 28, top: 28, color: cur.shots?.length ? "#fff" : cur.tile.sub, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease", whiteSpace: "nowrap" }}>{cur.kind}</span>
-            <span style={{ position: "absolute", left: 28, bottom: 28, fontSize: 52, fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1, color: cur.shots?.length ? "#fff" : cur.tile.fg, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease", whiteSpace: "nowrap" }}>{cur.name}</span>
+            <span className={tileImage(cur) ? "kv-tag kv-glass-dark" : "kv-label"} style={{ position: "absolute", left: 28, top: 28, color: tileImage(cur) ? "#fff" : cur.tile.sub, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease", whiteSpace: "nowrap" }}>{cur.kind}</span>
+            <span style={{ position: "absolute", left: 28, bottom: 28, fontSize: 52, fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1, color: tileImage(cur) ? "#fff" : cur.tile.fg, opacity: phase === "start" || phase === "shrink" ? 1 : 0, transition: phase === "shrink" ? "opacity 300ms ease 500ms" : still ? "none" : "opacity 250ms ease", whiteSpace: "nowrap" }}>{cur.name}</span>
           </div>
         </div>
       </div>
@@ -234,6 +234,13 @@ function ProjectDetails({ p }: { p: Project }) {
 
 function Card({ style, label }: { style: React.CSSProperties; label: string }) {
   return <div style={{ position: "absolute", borderRadius: 18, boxShadow: "0 24px 60px rgba(0,0,0,0.14)", display: "flex", alignItems: "flex-end", padding: 18, boxSizing: "border-box", fontSize: 13, color: "#6b6b6b", ...style }}>{label}</div>;
+}
+
+/** CSS background for a strip tile that has a picture, or undefined for a plain colour tile. */
+function tileImage(p: Project): string | undefined {
+  if (p.shots?.length) return `#111 url(${p.shots[0].src}) left top / cover`;
+  if (p.hero) return `#ececec url(${p.hero.src}) 62% 30% / cover no-repeat`;
+  return undefined;
 }
 
 function ProjectVisual({ p }: { p: Project }) {
