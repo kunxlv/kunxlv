@@ -29,7 +29,7 @@ export function WorkStage() {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
-  const stripTop = Math.max(470, Math.round(vh / 2 + 30));
+  const stripTop = Math.max(470, Math.round(vh / 2 + 50));
   const [titleScale, setTitleScale] = useState(0.15);
   const tilt = 58;
   const n = projects.length;
