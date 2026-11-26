@@ -6,7 +6,7 @@ export type Project = {
   tile: { bg: string; fg: string; sub: string };
   text: Segment[];
   facts: { k: string; v: string }[];
-  links: { label: string; href: string; primary?: boolean; badge?: "appstore" }[];
+  links: { label: string; href: string; primary?: boolean }[];
   visual: "phones" | "browser" | "system";
   /** A cut-out product photo (transparent background), shown instead of placeholder screens. */
   hero?: { src: string; alt: string };
@@ -21,9 +21,8 @@ export const projects: Project[] = [
     text: ["A day planner for iPhone that ", { hl: "doesn’t keep score" }, ". Tasks, lists, routines and reminders sit ", { hl: "beside your calendar" }, ", added in a sentence. Reminders ring as real alarms, tasks move with their meetings, and there are ", { hl: "no streaks, no overdue, nothing red" }, ". No account, and nothing leaves your phone."],
     facts: [{ k: "Website", v: "systms.app" }, { k: "Platform", v: "iOS" }, { k: "Status", v: "Coming soon to the App Store" }, { k: "Role", v: "Design and engineering" }],
     links: [
-      { label: "Coming soon to the App Store", href: "", badge: "appstore" },
+      { label: "Coming soon on the App Store", href: "", primary: true },
       { label: "Visit systms.app ↗", href: "https://systms.app" },
-      { label: "Follow the build", href: "/writing" },
     ],
     visual: "phones",
     hero: { src: "/images/builds/systms-hand.webp", alt: "systms on an iPhone, showing Monday’s tasks: morning routine, water the plants, laundry and more" },
