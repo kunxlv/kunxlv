@@ -24,7 +24,17 @@ function snapshot(): HTMLElement | null {
   const clone = page.cloneNode(true) as HTMLElement;
   clone.removeAttribute("data-kv-page");
   clone.setAttribute("aria-hidden", "true");
-  Object.assign(clone.style, { position: "absolute", left: "0", width: "100%", top: `${-window.scrollY}px`, pointerEvents: "none" });
+  // A copy is a still picture: it must not replay the title rise, and nothing inside it
+  // (fixed headers, raised titles) may poke out above the page sliding in over it.
+  clone.querySelectorAll("[data-kv-title]").forEach((n) => n.removeAttribute("data-kv-title"));
+  clone.querySelectorAll("[id]").forEach((n) => n.removeAttribute("id"));
+  // Pages React keeps hidden in the background come along in the clone; drop them.
+  const live = page.querySelectorAll<HTMLElement>("*");
+  const copy = clone.querySelectorAll<HTMLElement>("*");
+  const hidden: HTMLElement[] = [];
+  live.forEach((n, i) => { if (n.style.display === "none" || n.hidden) hidden.push(copy[i]); });
+  hidden.forEach((n) => n?.remove());
+  Object.assign(clone.style, { position: "absolute", left: "0", width: "100%", top: `${-window.scrollY}px`, pointerEvents: "none", isolation: "isolate", zIndex: "0", overflow: "hidden", height: `${window.scrollY + window.innerHeight}px` });
   return clone;
 }
 
@@ -117,7 +127,7 @@ export function TransitionProvider({ children, chrome }: { children: ReactNode; 
           await frame();
           enterTitles(true);
           const from = direction === "left" ? "translateX(-100%)" : direction === "right" ? "translateX(100%)" : "translateY(100%)";
-          const sheet = el({ position: "absolute", inset: "0", overflow: "hidden", transform: from, background: "#fff" });
+          const sheet = el({ position: "absolute", inset: "0", overflow: "hidden", transform: from, background: "#fff", zIndex: "1", isolation: "isolate" });
           const next = snapshot();
           if (next) sheet.appendChild(next);
           card.appendChild(sheet);
