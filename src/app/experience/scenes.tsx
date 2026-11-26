@@ -89,9 +89,11 @@ export function ExperienceScenes() {
           );
         })}
 
-        <section aria-label="Education and certifications" style={{ position: "absolute", inset: 0, zIndex: n + 1, transform: `translateY(${((1 - ease(clamp(p - n, 0, 1))) * 100).toFixed(2)}%)`, background: "#fff", color: "#000", display: "flex", flexDirection: "column", justifyContent: "center", gap: 28, padding: "0 clamp(24px, 8vw, 160px)", boxSizing: "border-box" }}>
+        <section aria-label="Earlier experience, education and certifications" style={{ position: "absolute", inset: 0, zIndex: n + 1, transform: `translateY(${((1 - ease(clamp(p - n, 0, 1))) * 100).toFixed(2)}%)`, background: "#fff", color: "#000", display: "flex", flexDirection: "column", justifyContent: "center", gap: 28, padding: "0 clamp(24px, 8vw, 160px)", boxSizing: "border-box" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 28, opacity: clamp((p - n - 0.5) / 0.35, 0, 1) }}>
-            <h2 className="kv-label" style={{ margin: 0, color: "#6b6b6b" }}>Education and certifications</h2>
+            <h2 className="kv-label" style={{ margin: 0, color: "#6b6b6b" }}>Before Dublin</h2>
+            <p style={{ margin: 0, maxWidth: 760, fontSize: "clamp(22px, 2.2vw, 30px)", fontWeight: 500, letterSpacing: "-0.015em", lineHeight: 1.3 }}>Two years as a software engineer in India, building identity and access management software.</p>
+            <h2 className="kv-label" style={{ margin: "12px 0 0", color: "#6b6b6b" }}>Education and certifications</h2>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, fontSize: "clamp(22px, 2.2vw, 30px)", fontWeight: 500, letterSpacing: "-0.015em", lineHeight: 1.3 }}>
               <span>MSc Computing, Dublin City University</span>
               <span>Google Cloud Professional Data Engineer</span>
