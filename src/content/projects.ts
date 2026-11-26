@@ -6,8 +6,10 @@ export type Project = {
   tile: { bg: string; fg: string; sub: string };
   text: Segment[];
   facts: { k: string; v: string }[];
-  links: { label: string; href: string; primary?: boolean }[];
+  links: { label: string; href: string; primary?: boolean; badge?: "appstore" }[];
   visual: "phones" | "browser" | "system";
+  /** A cut-out product photo (transparent background), shown instead of placeholder screens. */
+  hero?: { src: string; alt: string };
   /** Real screenshots, front one first. Also used as the tile image. */
   shots?: { src: string; url: string }[];
 };
@@ -16,10 +18,15 @@ export const projects: Project[] = [
   {
     slug: "systms", name: "systms", kind: "iOS app",
     tile: { bg: "#1a1a1a", fg: "#fff", sub: "#b5b5b5" },
-    text: ["A task app for days that don’t go to plan. It reads your ", { hl: "calendar and location" }, " to switch between ", { hl: "work, home and commute" }, ", starts each morning with a ", { hl: "capacity check-in" }, ", and never shows anything as overdue."],
-    facts: [{ k: "Platform", v: "iOS" }, { k: "Status", v: "In development" }, { k: "Role", v: "Design and engineering" }],
-    links: [{ label: "Follow the build", href: "/writing", primary: true }],
+    text: ["A day planner for iPhone that ", { hl: "doesn’t keep score" }, ". Tasks, lists, routines and reminders sit ", { hl: "beside your calendar" }, ", added in a sentence. Reminders ring as real alarms, tasks move with their meetings, and there are ", { hl: "no streaks, no overdue, nothing red" }, ". No account, and nothing leaves your phone."],
+    facts: [{ k: "Website", v: "systms.app" }, { k: "Platform", v: "iOS" }, { k: "Status", v: "Coming soon to the App Store" }, { k: "Role", v: "Design and engineering" }],
+    links: [
+      { label: "Coming soon to the App Store", href: "", badge: "appstore" },
+      { label: "Visit systms.app ↗", href: "https://systms.app" },
+      { label: "Follow the build", href: "/writing" },
+    ],
     visual: "phones",
+    hero: { src: "/images/builds/systms-hand.webp", alt: "systms on an iPhone, showing Monday’s tasks: morning routine, water the plants, laundry and more" },
   },
   {
     slug: "onyx", name: "Onyx", kind: "Home server",
